@@ -77,7 +77,7 @@ public class MultiwaySwitchInfoResource {
         if (multiwaySwitchInfo.getId() == null) {
             return createMultiwaySwitchInfo(multiwaySwitchInfo);
         }
-        MultiwaySwitchInfo result = multiwaySwitchInfoService.save(multiwaySwitchInfo);
+        MultiwaySwitchInfo result = multiwaySwitchInfoService.update(multiwaySwitchInfo);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, multiwaySwitchInfo.getId().toString()))
             .body(result);

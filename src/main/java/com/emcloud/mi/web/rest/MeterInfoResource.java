@@ -77,7 +77,7 @@ public class MeterInfoResource {
         if (meterInfo.getId() == null) {
             return createMeterInfo(meterInfo);
         }
-        MeterInfo result = meterInfoService.save(meterInfo);
+        MeterInfo result = meterInfoService.update(meterInfo);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, meterInfo.getId().toString()))
             .body(result);

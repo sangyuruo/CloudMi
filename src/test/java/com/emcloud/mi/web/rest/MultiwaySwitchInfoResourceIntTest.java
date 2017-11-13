@@ -108,7 +108,7 @@ public class MultiwaySwitchInfoResourceIntTest {
      */
     public static MultiwaySwitchInfo createEntity(EntityManager em) {
         MultiwaySwitchInfo multiwaySwitchInfo = new MultiwaySwitchInfo()
-            .multiwaySwitchcode(DEFAULT_MULTIWAY_SWITCHCODE)
+            .multiwaySwitchCode(DEFAULT_MULTIWAY_SWITCHCODE)
             .switchCode(DEFAULT_SWITCH_CODE)
             .createdBy(DEFAULT_CREATED_BY)
             .createTime(DEFAULT_CREATE_TIME)
@@ -138,7 +138,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         List<MultiwaySwitchInfo> multiwaySwitchInfoList = multiwaySwitchInfoRepository.findAll();
         assertThat(multiwaySwitchInfoList).hasSize(databaseSizeBeforeCreate + 1);
         MultiwaySwitchInfo testMultiwaySwitchInfo = multiwaySwitchInfoList.get(multiwaySwitchInfoList.size() - 1);
-        assertThat(testMultiwaySwitchInfo.getMultiwaySwitchcode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitchInfo.getmultiwaySwitchCode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
         assertThat(testMultiwaySwitchInfo.getSwitchCode()).isEqualTo(DEFAULT_SWITCH_CODE);
         assertThat(testMultiwaySwitchInfo.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testMultiwaySwitchInfo.getCreateTime()).isEqualTo(DEFAULT_CREATE_TIME);
@@ -171,7 +171,7 @@ public class MultiwaySwitchInfoResourceIntTest {
     public void checkMultiwaySwitchcodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = multiwaySwitchInfoRepository.findAll().size();
         // set the field null
-        multiwaySwitchInfo.setMultiwaySwitchcode(null);
+        multiwaySwitchInfo.setmultiwaySwitchCode(null);
 
         // Create the MultiwaySwitchInfo, which fails.
 
@@ -333,7 +333,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         // Update the multiwaySwitchInfo
         MultiwaySwitchInfo updatedMultiwaySwitchInfo = multiwaySwitchInfoRepository.findOne(multiwaySwitchInfo.getId());
         updatedMultiwaySwitchInfo
-            .multiwaySwitchcode(UPDATED_MULTIWAY_SWITCHCODE)
+            .multiwaySwitchCode(UPDATED_MULTIWAY_SWITCHCODE)
             .switchCode(UPDATED_SWITCH_CODE)
             .createdBy(UPDATED_CREATED_BY)
             .createTime(UPDATED_CREATE_TIME)
@@ -350,7 +350,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         List<MultiwaySwitchInfo> multiwaySwitchInfoList = multiwaySwitchInfoRepository.findAll();
         assertThat(multiwaySwitchInfoList).hasSize(databaseSizeBeforeUpdate);
         MultiwaySwitchInfo testMultiwaySwitchInfo = multiwaySwitchInfoList.get(multiwaySwitchInfoList.size() - 1);
-        assertThat(testMultiwaySwitchInfo.getMultiwaySwitchcode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitchInfo.getmultiwaySwitchCode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
         assertThat(testMultiwaySwitchInfo.getSwitchCode()).isEqualTo(UPDATED_SWITCH_CODE);
         assertThat(testMultiwaySwitchInfo.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testMultiwaySwitchInfo.getCreateTime()).isEqualTo(UPDATED_CREATE_TIME);

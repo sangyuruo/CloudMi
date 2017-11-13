@@ -28,8 +28,8 @@ public class MultiwaySwitchInfo implements Serializable {
 
     @NotNull
     @Size(max = 200)
-    @Column(name = "multiway_switchcode", length = 200, nullable = false)
-    private String multiwaySwitchcode;
+    @Column(name = "multiway_switch_code", length = 200, nullable = false)
+    private String multiwaySwitchCode;
 
     /**
      * 设备编码
@@ -90,17 +90,17 @@ public class MultiwaySwitchInfo implements Serializable {
         this.id = id;
     }
 
-    public String getMultiwaySwitchcode() {
-        return multiwaySwitchcode;
+    public String getmultiwaySwitchCode() {
+        return multiwaySwitchCode;
     }
 
-    public MultiwaySwitchInfo multiwaySwitchcode(String multiwaySwitchcode) {
-        this.multiwaySwitchcode = multiwaySwitchcode;
+    public MultiwaySwitchInfo multiwaySwitchCode(String multiwaySwitchCode) {
+        this.multiwaySwitchCode = multiwaySwitchCode;
         return this;
     }
 
-    public void setMultiwaySwitchcode(String multiwaySwitchcode) {
-        this.multiwaySwitchcode = multiwaySwitchcode;
+    public void setmultiwaySwitchCode(String multiwaySwitchCode) {
+        this.multiwaySwitchCode = multiwaySwitchCode;
     }
 
     public Integer getSwitchCode() {
@@ -206,7 +206,7 @@ public class MultiwaySwitchInfo implements Serializable {
     public String toString() {
         return "MultiwaySwitchInfo{" +
             "id=" + getId() +
-            ", multiwaySwitchcode='" + getMultiwaySwitchcode() + "'" +
+            ", multiwaySwitchCode='" + getmultiwaySwitchCode() + "'" +
             ", switchCode='" + getSwitchCode() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createTime='" + getCreateTime() + "'" +

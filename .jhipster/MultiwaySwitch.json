@@ -3,7 +3,8 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "multiwaySwitchcode",
+            "fieldName": "multiwaySwitchCode",
+            "javadoc": "设备编码 是MultiwaySwitchInfo外键",
             "fieldType": "String",
             "fieldValidateRules": [
                 "maxlength",
@@ -13,7 +14,7 @@
         },
         {
             "fieldName": "switchCode",
-            "javadoc": "设备编码 是MultiwaySwitchInfo外键",
+            "javadoc": "开关序号",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
@@ -21,12 +22,12 @@
         },
         {
             "fieldName": "switchStatus",
-            "javadoc": "开关序号",
+            "javadoc": "开关状态",
             "fieldType": "Integer"
         },
         {
             "fieldName": "recordTime",
-            "javadoc": "开关状态",
+            "javadoc": "记录时间",
             "fieldType": "Integer"
         }
     ],

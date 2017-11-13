@@ -1,5 +1,7 @@
 package com.emcloud.mi.service.impl;
 
+import com.emcloud.mi.domain.MeterInfo;
+import com.emcloud.mi.security.SecurityUtils;
 import com.emcloud.mi.service.MultiwaySwitchInfoService;
 import com.emcloud.mi.domain.MultiwaySwitchInfo;
 import com.emcloud.mi.repository.MultiwaySwitchInfoRepository;
@@ -9,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZonedDateTime;
 
 
 /**
@@ -36,6 +40,21 @@ public class MultiwaySwitchInfoServiceImpl implements MultiwaySwitchInfoService{
     public MultiwaySwitchInfo save(MultiwaySwitchInfo multiwaySwitchInfo) {
         log.debug("Request to save MultiwaySwitchInfo : {}", multiwaySwitchInfo);
         return multiwaySwitchInfoRepository.save(multiwaySwitchInfo);
+    }
+
+    /**
+     * Update a multiwaySwitchInfo.
+     *
+     * @param multiwaySwitchInfo the entity to update
+     * @return the persisted entity
+     */
+    @Override
+    public MultiwaySwitchInfo update(MultiwaySwitchInfo multiwaySwitchInfo) {
+        log.debug("Request to update meterCategoryInfo : {}", multiwaySwitchInfo);
+        multiwaySwitchInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
+        multiwaySwitchInfo.setUpdateTime(ZonedDateTime.now());
+        return multiwaySwitchInfoRepository.saveAndFlush(multiwaySwitchInfo);
+
     }
 
     /**

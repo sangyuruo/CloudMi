@@ -94,7 +94,7 @@ public class MultiwaySwitchResourceIntTest {
      */
     public static MultiwaySwitch createEntity(EntityManager em) {
         MultiwaySwitch multiwaySwitch = new MultiwaySwitch()
-            .multiwaySwitchcode(DEFAULT_MULTIWAY_SWITCHCODE)
+            .multiwaySwitchCode(DEFAULT_MULTIWAY_SWITCHCODE)
             .switchCode(DEFAULT_SWITCH_CODE)
             .switchStatus(DEFAULT_SWITCH_STATUS)
             .recordTime(DEFAULT_RECORD_TIME);
@@ -121,7 +121,7 @@ public class MultiwaySwitchResourceIntTest {
         List<MultiwaySwitch> multiwaySwitchList = multiwaySwitchRepository.findAll();
         assertThat(multiwaySwitchList).hasSize(databaseSizeBeforeCreate + 1);
         MultiwaySwitch testMultiwaySwitch = multiwaySwitchList.get(multiwaySwitchList.size() - 1);
-        assertThat(testMultiwaySwitch.getMultiwaySwitchcode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitch.getmultiwaySwitchCode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
         assertThat(testMultiwaySwitch.getSwitchCode()).isEqualTo(DEFAULT_SWITCH_CODE);
         assertThat(testMultiwaySwitch.getSwitchStatus()).isEqualTo(DEFAULT_SWITCH_STATUS);
         assertThat(testMultiwaySwitch.getRecordTime()).isEqualTo(DEFAULT_RECORD_TIME);
@@ -151,7 +151,7 @@ public class MultiwaySwitchResourceIntTest {
     public void checkMultiwaySwitchcodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = multiwaySwitchRepository.findAll().size();
         // set the field null
-        multiwaySwitch.setMultiwaySwitchcode(null);
+        multiwaySwitch.setmultiwaySwitchCode(null);
 
         // Create the MultiwaySwitch, which fails.
 
@@ -235,7 +235,7 @@ public class MultiwaySwitchResourceIntTest {
         // Update the multiwaySwitch
         MultiwaySwitch updatedMultiwaySwitch = multiwaySwitchRepository.findOne(multiwaySwitch.getId());
         updatedMultiwaySwitch
-            .multiwaySwitchcode(UPDATED_MULTIWAY_SWITCHCODE)
+            .multiwaySwitchCode(UPDATED_MULTIWAY_SWITCHCODE)
             .switchCode(UPDATED_SWITCH_CODE)
             .switchStatus(UPDATED_SWITCH_STATUS)
             .recordTime(UPDATED_RECORD_TIME);
@@ -249,7 +249,7 @@ public class MultiwaySwitchResourceIntTest {
         List<MultiwaySwitch> multiwaySwitchList = multiwaySwitchRepository.findAll();
         assertThat(multiwaySwitchList).hasSize(databaseSizeBeforeUpdate);
         MultiwaySwitch testMultiwaySwitch = multiwaySwitchList.get(multiwaySwitchList.size() - 1);
-        assertThat(testMultiwaySwitch.getMultiwaySwitchcode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitch.getmultiwaySwitchCode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
         assertThat(testMultiwaySwitch.getSwitchCode()).isEqualTo(UPDATED_SWITCH_CODE);
         assertThat(testMultiwaySwitch.getSwitchStatus()).isEqualTo(UPDATED_SWITCH_STATUS);
         assertThat(testMultiwaySwitch.getRecordTime()).isEqualTo(UPDATED_RECORD_TIME);

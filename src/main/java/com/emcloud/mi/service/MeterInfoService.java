@@ -18,6 +18,14 @@ public interface MeterInfoService {
     MeterInfo save(MeterInfo meterInfo);
 
     /**
+     * Uspdate a meterInfo.
+     *
+     * @param meterInfo the entity to update
+     * @return the persisted entity
+     */
+    MeterInfo update(MeterInfo meterInfo);
+
+    /**
      *  Get all the meterInfos.
      *
      *  @param pageable the pagination information

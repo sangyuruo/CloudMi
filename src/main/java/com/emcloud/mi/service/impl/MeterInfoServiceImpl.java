@@ -1,5 +1,6 @@
 package com.emcloud.mi.service.impl;
 
+import com.emcloud.mi.security.SecurityUtils;
 import com.emcloud.mi.service.MeterInfoService;
 import com.emcloud.mi.domain.MeterInfo;
 import com.emcloud.mi.repository.MeterInfoRepository;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZonedDateTime;
 
 
 /**
@@ -38,6 +41,20 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         return meterInfoRepository.save(meterInfo);
     }
 
+    /**
+     * Update a meterInfo.
+     *
+     * @param meterInfo the entity to update
+     * @return the persisted entity
+     */
+    @Override
+    public MeterInfo update(MeterInfo meterInfo) {
+        log.debug("Request to update meterCategoryInfo : {}", meterInfo);
+        meterInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
+        meterInfo.setUpdateTime(ZonedDateTime.now());
+        return meterInfoRepository.saveAndFlush(meterInfo);
+
+    }
     /**
      *  Get all the meterInfos.
      *
