@@ -1,0 +1,46 @@
+/**设备信息表*/
+entity MeterInfo {
+  meterCode String maxlength(200) required, /**设备编码*/
+  meterName String maxlength(200) required,/**设备名称*/
+  registerCode  Integer required,/**登记code*/
+  addressCode String maxlength(64),/**地址编码*/
+  organizationCode String maxlength(64),/**组织编码*/
+  companyCode String maxlength(64),/**公司编码*/
+  meterType String maxlength(100) required, /**设备类型*/
+  startOffset Integer,          /**起始偏移*/
+  numberOfRegisters Integer,   /**寄存器数量*/
+  controlAddress Integer,		/**控制地址*/
+  createdBy String maxlength(20) required,  /**创建人*/
+  createTime ZonedDateTime required,		/**创建时间*/
+  updatedBy String maxlength(20) required,	/**修改人*/
+  updateTime ZonedDateTime required,		/**修改时间*/
+  controlCommands String maxlength(100) /**下发命令*/
+}
+ 
+ /**设备状态表*/
+ entity MeterStatus {
+	meterCode String maxlength(200) required, /**设备编码  是MeterInfo外键*/
+	trafficStatus Integer, /**通讯状态*/
+	switchStatus Integer, /**开关状态*/
+	recordTime Integer /**记录时间*/
+}
+
+/**多路开关信息表*/
+ entity MultiwaySwitchInfo {
+	multiwaySwitch_code String maxlength(200) required, /**设备编码*/
+	switchCode Integer required, /**开关序号*/
+	createdBy String maxlength(20) required,  /**创建人*/
+    createTime ZonedDateTime required,		/**创建时间*/
+    updatedBy String maxlength(20) required,	/**修改人*/
+    updateTime ZonedDateTime required,		/**修改时间*/
+	controlCommands String maxlength(100) /**下发命令*/
+}
+
+/**多路开关状态表*/
+ entity MultiwaySwitch {
+	multiwaySwitch_code String maxlength(200) required, /**设备编码 是MultiwaySwitchInfo外键 */
+	switchCode Integer required, /**开关序号*/
+	switchStatus Integer, /**开关状态*/
+	recordTime Integer /**记录时间*/
+}
+ 

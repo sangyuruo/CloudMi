@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "multiwaySwitchcode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "switchCode",
+            "javadoc": "设备编码 是MultiwaySwitchInfo外键",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "switchStatus",
+            "javadoc": "开关序号",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "recordTime",
+            "javadoc": "开关状态",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171113035931",
+    "javadoc": "多路开关状态表",
+    "entityTableName": "multiway_switch",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "EmCloudMi"
+}

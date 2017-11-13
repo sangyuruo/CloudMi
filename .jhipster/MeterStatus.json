@@ -1,0 +1,38 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "meterCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "trafficStatus",
+            "javadoc": "设备编码  是MeterInfo外键",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "switchStatus",
+            "javadoc": "通讯状态",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "recordTime",
+            "javadoc": "开关状态",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171113035929",
+    "javadoc": "设备状态表",
+    "entityTableName": "meter_status",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "EmCloudMi"
+}
