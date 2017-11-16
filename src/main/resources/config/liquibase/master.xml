@@ -3,12 +3,6 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171113035928_added_entity_MeterInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171113035929_added_entity_MeterStatus.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171113035930_added_entity_MultiwaySwitchInfo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20171113035931_added_entity_MultiwaySwitch.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

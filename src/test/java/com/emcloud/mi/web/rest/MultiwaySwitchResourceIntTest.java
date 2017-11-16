@@ -4,9 +4,6 @@ import com.emcloud.mi.EmCloudMiApp;
 
 import com.emcloud.mi.config.SecurityBeanOverrideConfiguration;
 
-import com.emcloud.mi.domain.MultiwaySwitch;
-import com.emcloud.mi.repository.MultiwaySwitchRepository;
-import com.emcloud.mi.service.MultiwaySwitchService;
 import com.emcloud.mi.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;

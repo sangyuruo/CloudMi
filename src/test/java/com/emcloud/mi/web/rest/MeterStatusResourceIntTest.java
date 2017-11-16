@@ -4,9 +4,6 @@ import com.emcloud.mi.EmCloudMiApp;
 
 import com.emcloud.mi.config.SecurityBeanOverrideConfiguration;
 
-import com.emcloud.mi.domain.MeterStatus;
-import com.emcloud.mi.repository.MeterStatusRepository;
-import com.emcloud.mi.service.MeterStatusService;
 import com.emcloud.mi.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
