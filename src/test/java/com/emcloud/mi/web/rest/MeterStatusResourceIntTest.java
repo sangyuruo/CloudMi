@@ -4,6 +4,9 @@ import com.emcloud.mi.EmCloudMiApp;
 
 import com.emcloud.mi.config.SecurityBeanOverrideConfiguration;
 
+import com.emcloud.mi.domain.MeterStatus;
+import com.emcloud.mi.repository.MeterStatusRepository;
+import com.emcloud.mi.service.MeterStatusService;
 import com.emcloud.mi.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -21,6 +24,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.emcloud.mi.web.rest.TestUtil.createFormattingConversionService;
@@ -47,8 +52,8 @@ public class MeterStatusResourceIntTest {
     private static final Integer DEFAULT_SWITCH_STATUS = 1;
     private static final Integer UPDATED_SWITCH_STATUS = 2;
 
-    private static final Integer DEFAULT_RECORD_TIME = 1;
-    private static final Integer UPDATED_RECORD_TIME = 2;
+    private static final Instant DEFAULT_RECORD_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_RECORD_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private MeterStatusRepository meterStatusRepository;
@@ -175,7 +180,7 @@ public class MeterStatusResourceIntTest {
             .andExpect(jsonPath("$.[*].meterCode").value(hasItem(DEFAULT_METER_CODE.toString())))
             .andExpect(jsonPath("$.[*].trafficStatus").value(hasItem(DEFAULT_TRAFFIC_STATUS)))
             .andExpect(jsonPath("$.[*].switchStatus").value(hasItem(DEFAULT_SWITCH_STATUS)))
-            .andExpect(jsonPath("$.[*].recordTime").value(hasItem(DEFAULT_RECORD_TIME)));
+            .andExpect(jsonPath("$.[*].recordTime").value(hasItem(DEFAULT_RECORD_TIME.toString())));
     }
 
     @Test
@@ -192,7 +197,7 @@ public class MeterStatusResourceIntTest {
             .andExpect(jsonPath("$.meterCode").value(DEFAULT_METER_CODE.toString()))
             .andExpect(jsonPath("$.trafficStatus").value(DEFAULT_TRAFFIC_STATUS))
             .andExpect(jsonPath("$.switchStatus").value(DEFAULT_SWITCH_STATUS))
-            .andExpect(jsonPath("$.recordTime").value(DEFAULT_RECORD_TIME));
+            .andExpect(jsonPath("$.recordTime").value(DEFAULT_RECORD_TIME.toString()));
     }
 
     @Test

@@ -4,6 +4,9 @@ import com.emcloud.mi.EmCloudMiApp;
 
 import com.emcloud.mi.config.SecurityBeanOverrideConfiguration;
 
+import com.emcloud.mi.domain.MultiwaySwitch;
+import com.emcloud.mi.repository.MultiwaySwitchRepository;
+import com.emcloud.mi.service.MultiwaySwitchService;
 import com.emcloud.mi.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -21,6 +24,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.emcloud.mi.web.rest.TestUtil.createFormattingConversionService;
@@ -38,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {EmCloudMiApp.class, SecurityBeanOverrideConfiguration.class})
 public class MultiwaySwitchResourceIntTest {
 
-    private static final String DEFAULT_MULTIWAY_SWITCHCODE = "AAAAAAAAAA";
-    private static final String UPDATED_MULTIWAY_SWITCHCODE = "BBBBBBBBBB";
+    private static final String DEFAULT_METER_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_METER_CODE = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_SWITCH_CODE = 1;
     private static final Integer UPDATED_SWITCH_CODE = 2;
@@ -47,8 +52,8 @@ public class MultiwaySwitchResourceIntTest {
     private static final Integer DEFAULT_SWITCH_STATUS = 1;
     private static final Integer UPDATED_SWITCH_STATUS = 2;
 
-    private static final Integer DEFAULT_RECORD_TIME = 1;
-    private static final Integer UPDATED_RECORD_TIME = 2;
+    private static final Instant DEFAULT_RECORD_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_RECORD_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private MultiwaySwitchRepository multiwaySwitchRepository;
@@ -91,7 +96,7 @@ public class MultiwaySwitchResourceIntTest {
      */
     public static MultiwaySwitch createEntity(EntityManager em) {
         MultiwaySwitch multiwaySwitch = new MultiwaySwitch()
-            .multiwaySwitchCode(DEFAULT_MULTIWAY_SWITCHCODE)
+            .meterCode(DEFAULT_METER_CODE)
             .switchCode(DEFAULT_SWITCH_CODE)
             .switchStatus(DEFAULT_SWITCH_STATUS)
             .recordTime(DEFAULT_RECORD_TIME);
@@ -118,7 +123,7 @@ public class MultiwaySwitchResourceIntTest {
         List<MultiwaySwitch> multiwaySwitchList = multiwaySwitchRepository.findAll();
         assertThat(multiwaySwitchList).hasSize(databaseSizeBeforeCreate + 1);
         MultiwaySwitch testMultiwaySwitch = multiwaySwitchList.get(multiwaySwitchList.size() - 1);
-        assertThat(testMultiwaySwitch.getmultiwaySwitchCode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitch.getMeterCode()).isEqualTo(DEFAULT_METER_CODE);
         assertThat(testMultiwaySwitch.getSwitchCode()).isEqualTo(DEFAULT_SWITCH_CODE);
         assertThat(testMultiwaySwitch.getSwitchStatus()).isEqualTo(DEFAULT_SWITCH_STATUS);
         assertThat(testMultiwaySwitch.getRecordTime()).isEqualTo(DEFAULT_RECORD_TIME);
@@ -145,10 +150,10 @@ public class MultiwaySwitchResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMultiwaySwitchcodeIsRequired() throws Exception {
+    public void checkMeterCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = multiwaySwitchRepository.findAll().size();
         // set the field null
-        multiwaySwitch.setmultiwaySwitchCode(null);
+        multiwaySwitch.setMeterCode(null);
 
         // Create the MultiwaySwitch, which fails.
 
@@ -190,10 +195,10 @@ public class MultiwaySwitchResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(multiwaySwitch.getId().intValue())))
-            .andExpect(jsonPath("$.[*].multiwaySwitchcode").value(hasItem(DEFAULT_MULTIWAY_SWITCHCODE.toString())))
+            .andExpect(jsonPath("$.[*].meterCode").value(hasItem(DEFAULT_METER_CODE.toString())))
             .andExpect(jsonPath("$.[*].switchCode").value(hasItem(DEFAULT_SWITCH_CODE)))
             .andExpect(jsonPath("$.[*].switchStatus").value(hasItem(DEFAULT_SWITCH_STATUS)))
-            .andExpect(jsonPath("$.[*].recordTime").value(hasItem(DEFAULT_RECORD_TIME)));
+            .andExpect(jsonPath("$.[*].recordTime").value(hasItem(DEFAULT_RECORD_TIME.toString())));
     }
 
     @Test
@@ -207,10 +212,10 @@ public class MultiwaySwitchResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(multiwaySwitch.getId().intValue()))
-            .andExpect(jsonPath("$.multiwaySwitchcode").value(DEFAULT_MULTIWAY_SWITCHCODE.toString()))
+            .andExpect(jsonPath("$.meterCode").value(DEFAULT_METER_CODE.toString()))
             .andExpect(jsonPath("$.switchCode").value(DEFAULT_SWITCH_CODE))
             .andExpect(jsonPath("$.switchStatus").value(DEFAULT_SWITCH_STATUS))
-            .andExpect(jsonPath("$.recordTime").value(DEFAULT_RECORD_TIME));
+            .andExpect(jsonPath("$.recordTime").value(DEFAULT_RECORD_TIME.toString()));
     }
 
     @Test
@@ -232,7 +237,7 @@ public class MultiwaySwitchResourceIntTest {
         // Update the multiwaySwitch
         MultiwaySwitch updatedMultiwaySwitch = multiwaySwitchRepository.findOne(multiwaySwitch.getId());
         updatedMultiwaySwitch
-            .multiwaySwitchCode(UPDATED_MULTIWAY_SWITCHCODE)
+            .meterCode(UPDATED_METER_CODE)
             .switchCode(UPDATED_SWITCH_CODE)
             .switchStatus(UPDATED_SWITCH_STATUS)
             .recordTime(UPDATED_RECORD_TIME);
@@ -246,7 +251,7 @@ public class MultiwaySwitchResourceIntTest {
         List<MultiwaySwitch> multiwaySwitchList = multiwaySwitchRepository.findAll();
         assertThat(multiwaySwitchList).hasSize(databaseSizeBeforeUpdate);
         MultiwaySwitch testMultiwaySwitch = multiwaySwitchList.get(multiwaySwitchList.size() - 1);
-        assertThat(testMultiwaySwitch.getmultiwaySwitchCode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitch.getMeterCode()).isEqualTo(UPDATED_METER_CODE);
         assertThat(testMultiwaySwitch.getSwitchCode()).isEqualTo(UPDATED_SWITCH_CODE);
         assertThat(testMultiwaySwitch.getSwitchStatus()).isEqualTo(UPDATED_SWITCH_STATUS);
         assertThat(testMultiwaySwitch.getRecordTime()).isEqualTo(UPDATED_RECORD_TIME);

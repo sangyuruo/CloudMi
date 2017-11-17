@@ -80,7 +80,7 @@ class MeterStatusGatlingTest extends Simulation {
             .exec(http("Create new meterStatus")
             .post("/emcloudmi/api/meter-statuses")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "trafficStatus":"0", "switchStatus":"0", "recordTime":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "trafficStatus":"0", "switchStatus":"0", "recordTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_meterStatus_url"))).exitHereIfFailed
             .pause(10)

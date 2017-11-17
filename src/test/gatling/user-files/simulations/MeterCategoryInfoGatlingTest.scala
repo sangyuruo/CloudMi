@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the MultiwaySwitch entity.
+ * Performance test for the MeterCategoryInfo entity.
  */
-class MultiwaySwitchGatlingTest extends Simulation {
+class MeterCategoryInfoGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -48,7 +48,7 @@ class MultiwaySwitchGatlingTest extends Simulation {
         "Authorization" -> "Bearer ${access_token}"
     )
 
-    val scn = scenario("Test the MultiwaySwitch entity")
+    val scn = scenario("Test the MeterCategoryInfo entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -72,26 +72,26 @@ class MultiwaySwitchGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all multiwaySwitches")
-            .get("/emcloudmi/api/multiway-switches")
+            exec(http("Get all meterCategoryInfos")
+            .get("/emcloudmi/api/meter-category-infos")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new multiwaySwitch")
-            .post("/emcloudmi/api/multiway-switches")
+            .exec(http("Create new meterCategoryInfo")
+            .post("/emcloudmi/api/meter-category-infos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "switchCode":"0", "switchStatus":"0", "recordTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "meterName":"SAMPLE_TEXT", "meterType":"SAMPLE_TEXT", "meterFactory":"SAMPLE_TEXT", "tel":"0", "startOffset":"0", "numberOfRegisters":"0", "controlAddress":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_multiwaySwitch_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_meterCategoryInfo_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created multiwaySwitch")
-                .get("/emcloudmi${new_multiwaySwitch_url}")
+                exec(http("Get created meterCategoryInfo")
+                .get("/emcloudmi${new_meterCategoryInfo_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created multiwaySwitch")
-            .delete("/emcloudmi${new_multiwaySwitch_url}")
+            .exec(http("Delete created meterCategoryInfo")
+            .delete("/emcloudmi${new_meterCategoryInfo_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

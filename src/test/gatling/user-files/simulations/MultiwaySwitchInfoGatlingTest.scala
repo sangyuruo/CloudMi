@@ -80,7 +80,7 @@ class MultiwaySwitchInfoGatlingTest extends Simulation {
             .exec(http("Create new multiwaySwitchInfo")
             .post("/emcloudmi/api/multiway-switch-infos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "multiwaySwitchcode":"SAMPLE_TEXT", "switchCode":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "switchCode":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_multiwaySwitchInfo_url"))).exitHereIfFailed
             .pause(10)

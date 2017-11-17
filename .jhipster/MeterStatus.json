@@ -32,8 +32,8 @@
     "javadoc": "设备状态表\n@author youhong",
     "entityTableName": "meter_status",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

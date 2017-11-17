@@ -102,8 +102,8 @@
     "javadoc": "设备分类信息表\n@author youhong",
     "entityTableName": "meter_category_info",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

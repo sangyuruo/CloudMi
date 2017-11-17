@@ -4,6 +4,9 @@ import com.emcloud.mi.EmCloudMiApp;
 
 import com.emcloud.mi.config.SecurityBeanOverrideConfiguration;
 
+import com.emcloud.mi.domain.MultiwaySwitchInfo;
+import com.emcloud.mi.repository.MultiwaySwitchInfoRepository;
+import com.emcloud.mi.service.MultiwaySwitchInfoService;
 import com.emcloud.mi.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -22,12 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static com.emcloud.mi.web.rest.TestUtil.sameInstant;
 import static com.emcloud.mi.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {EmCloudMiApp.class, SecurityBeanOverrideConfiguration.class})
 public class MultiwaySwitchInfoResourceIntTest {
 
-    private static final String DEFAULT_MULTIWAY_SWITCHCODE = "AAAAAAAAAA";
-    private static final String UPDATED_MULTIWAY_SWITCHCODE = "BBBBBBBBBB";
+    private static final String DEFAULT_METER_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_METER_CODE = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_SWITCH_CODE = 1;
     private static final Integer UPDATED_SWITCH_CODE = 2;
@@ -52,14 +52,14 @@ public class MultiwaySwitchInfoResourceIntTest {
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_CREATE_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_CREATE_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_CREATE_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATE_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_UPDATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_UPDATED_BY = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_UPDATE_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_UPDATE_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Instant DEFAULT_UPDATE_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_UPDATE_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_CONTROL_COMMANDS = "AAAAAAAAAA";
     private static final String UPDATED_CONTROL_COMMANDS = "BBBBBBBBBB";
@@ -105,7 +105,7 @@ public class MultiwaySwitchInfoResourceIntTest {
      */
     public static MultiwaySwitchInfo createEntity(EntityManager em) {
         MultiwaySwitchInfo multiwaySwitchInfo = new MultiwaySwitchInfo()
-            .multiwaySwitchCode(DEFAULT_MULTIWAY_SWITCHCODE)
+            .meterCode(DEFAULT_METER_CODE)
             .switchCode(DEFAULT_SWITCH_CODE)
             .createdBy(DEFAULT_CREATED_BY)
             .createTime(DEFAULT_CREATE_TIME)
@@ -135,7 +135,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         List<MultiwaySwitchInfo> multiwaySwitchInfoList = multiwaySwitchInfoRepository.findAll();
         assertThat(multiwaySwitchInfoList).hasSize(databaseSizeBeforeCreate + 1);
         MultiwaySwitchInfo testMultiwaySwitchInfo = multiwaySwitchInfoList.get(multiwaySwitchInfoList.size() - 1);
-        assertThat(testMultiwaySwitchInfo.getmultiwaySwitchCode()).isEqualTo(DEFAULT_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitchInfo.getMeterCode()).isEqualTo(DEFAULT_METER_CODE);
         assertThat(testMultiwaySwitchInfo.getSwitchCode()).isEqualTo(DEFAULT_SWITCH_CODE);
         assertThat(testMultiwaySwitchInfo.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testMultiwaySwitchInfo.getCreateTime()).isEqualTo(DEFAULT_CREATE_TIME);
@@ -165,10 +165,10 @@ public class MultiwaySwitchInfoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMultiwaySwitchcodeIsRequired() throws Exception {
+    public void checkMeterCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = multiwaySwitchInfoRepository.findAll().size();
         // set the field null
-        multiwaySwitchInfo.setmultiwaySwitchCode(null);
+        multiwaySwitchInfo.setMeterCode(null);
 
         // Create the MultiwaySwitchInfo, which fails.
 
@@ -282,12 +282,12 @@ public class MultiwaySwitchInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(multiwaySwitchInfo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].multiwaySwitchcode").value(hasItem(DEFAULT_MULTIWAY_SWITCHCODE.toString())))
+            .andExpect(jsonPath("$.[*].meterCode").value(hasItem(DEFAULT_METER_CODE.toString())))
             .andExpect(jsonPath("$.[*].switchCode").value(hasItem(DEFAULT_SWITCH_CODE)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY.toString())))
-            .andExpect(jsonPath("$.[*].createTime").value(hasItem(sameInstant(DEFAULT_CREATE_TIME))))
+            .andExpect(jsonPath("$.[*].createTime").value(hasItem(DEFAULT_CREATE_TIME.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
-            .andExpect(jsonPath("$.[*].updateTime").value(hasItem(sameInstant(DEFAULT_UPDATE_TIME))))
+            .andExpect(jsonPath("$.[*].updateTime").value(hasItem(DEFAULT_UPDATE_TIME.toString())))
             .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())));
     }
 
@@ -302,12 +302,12 @@ public class MultiwaySwitchInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(multiwaySwitchInfo.getId().intValue()))
-            .andExpect(jsonPath("$.multiwaySwitchcode").value(DEFAULT_MULTIWAY_SWITCHCODE.toString()))
+            .andExpect(jsonPath("$.meterCode").value(DEFAULT_METER_CODE.toString()))
             .andExpect(jsonPath("$.switchCode").value(DEFAULT_SWITCH_CODE))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY.toString()))
-            .andExpect(jsonPath("$.createTime").value(sameInstant(DEFAULT_CREATE_TIME)))
+            .andExpect(jsonPath("$.createTime").value(DEFAULT_CREATE_TIME.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
-            .andExpect(jsonPath("$.updateTime").value(sameInstant(DEFAULT_UPDATE_TIME)))
+            .andExpect(jsonPath("$.updateTime").value(DEFAULT_UPDATE_TIME.toString()))
             .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()));
     }
 
@@ -330,7 +330,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         // Update the multiwaySwitchInfo
         MultiwaySwitchInfo updatedMultiwaySwitchInfo = multiwaySwitchInfoRepository.findOne(multiwaySwitchInfo.getId());
         updatedMultiwaySwitchInfo
-            .multiwaySwitchCode(UPDATED_MULTIWAY_SWITCHCODE)
+            .meterCode(UPDATED_METER_CODE)
             .switchCode(UPDATED_SWITCH_CODE)
             .createdBy(UPDATED_CREATED_BY)
             .createTime(UPDATED_CREATE_TIME)
@@ -347,7 +347,7 @@ public class MultiwaySwitchInfoResourceIntTest {
         List<MultiwaySwitchInfo> multiwaySwitchInfoList = multiwaySwitchInfoRepository.findAll();
         assertThat(multiwaySwitchInfoList).hasSize(databaseSizeBeforeUpdate);
         MultiwaySwitchInfo testMultiwaySwitchInfo = multiwaySwitchInfoList.get(multiwaySwitchInfoList.size() - 1);
-        assertThat(testMultiwaySwitchInfo.getmultiwaySwitchCode()).isEqualTo(UPDATED_MULTIWAY_SWITCHCODE);
+        assertThat(testMultiwaySwitchInfo.getMeterCode()).isEqualTo(UPDATED_METER_CODE);
         assertThat(testMultiwaySwitchInfo.getSwitchCode()).isEqualTo(UPDATED_SWITCH_CODE);
         assertThat(testMultiwaySwitchInfo.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testMultiwaySwitchInfo.getCreateTime()).isEqualTo(UPDATED_CREATE_TIME);
