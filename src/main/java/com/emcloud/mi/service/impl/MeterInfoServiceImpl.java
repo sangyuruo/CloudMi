@@ -39,6 +39,10 @@ public class MeterInfoServiceImpl implements MeterInfoService{
     @Override
     public MeterInfo save(MeterInfo meterInfo) {
         log.debug("Request to save MeterInfo : {}", meterInfo);
+        meterInfo.setCreatedBy(SecurityUtils.getCurrentUserLogin());
+        meterInfo.setCreateTime(Instant.now());
+        meterInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
+        meterInfo.setUpdateTime(Instant.now());
         return meterInfoRepository.save(meterInfo);
     }
 

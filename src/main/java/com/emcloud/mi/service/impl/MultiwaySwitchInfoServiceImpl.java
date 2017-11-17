@@ -39,6 +39,10 @@ public class MultiwaySwitchInfoServiceImpl implements MultiwaySwitchInfoService{
     @Override
     public MultiwaySwitchInfo save(MultiwaySwitchInfo multiwaySwitchInfo) {
         log.debug("Request to save MultiwaySwitchInfo : {}", multiwaySwitchInfo);
+        multiwaySwitchInfo.setCreatedBy(SecurityUtils.getCurrentUserLogin());
+        multiwaySwitchInfo.setCreateTime(Instant.now());
+        multiwaySwitchInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
+        multiwaySwitchInfo.setUpdateTime(Instant.now());
         return multiwaySwitchInfoRepository.save(multiwaySwitchInfo);
     }
 

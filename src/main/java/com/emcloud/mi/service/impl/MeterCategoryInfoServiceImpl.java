@@ -39,6 +39,10 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
     @Override
     public MeterCategoryInfo save(MeterCategoryInfo meterCategoryInfo) {
         log.debug("Request to save MeterCategoryInfo : {}", meterCategoryInfo);
+        meterCategoryInfo.setCreatedBy(SecurityUtils.getCurrentUserLogin());
+        meterCategoryInfo.setCreateTime(Instant.now());
+        meterCategoryInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
+        meterCategoryInfo.setUpdateTime(Instant.now());
         return meterCategoryInfoRepository.save(meterCategoryInfo);
     }
 
@@ -54,7 +58,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
         meterCategoryInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         meterCategoryInfo.setUpdateTime(Instant.now());
         return meterCategoryInfoRepository.save(meterCategoryInfo);
-    }
+   }
 
     /**
      *  Get all the meterCategoryInfos.
