@@ -104,12 +104,12 @@ public class MeterCategoryInfoResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of companies in body
      */
-    @GetMapping("/companies")
+    @GetMapping("/meter-category-infos")
     @Timed
-    public ResponseEntity<List<MeterCategoryInfo>> getAllCompaniesByMeterName(@ApiParam Pageable pageable,@PathVariable String meterName) {
-        log.debug("REST request to get a page of Companies by MeterName");
+    public ResponseEntity<List<MeterCategoryInfo>> getAllByMeterName(@ApiParam Pageable pageable,@PathVariable String meterName) {
+        log.debug("REST request to get a page of MeterCategoryInfo by MeterName");
         Page<MeterCategoryInfo> page = meterCategoryInfoService.findByMeterName(pageable,meterName);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies/bymetername");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos/bymetername");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

@@ -97,7 +97,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
     @Override
     @Transactional(readOnly = true)
     public Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName) {
-        //log.debug("Request to get all Companies by companyname");
+        log.debug("Request to get all MeterCategoryInfo by companyname");
         return meterCategoryInfoRepository.findAllByMeterNameContaining(pageable,meterName);
     }
 

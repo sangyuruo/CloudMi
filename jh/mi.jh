@@ -11,7 +11,7 @@ entity MeterCategoryInfo {
   meterFactory String maxlength(100)  required,
   /** 联系方式*/
   tel Integer,
-  /**起始偏移*/
+  /**起始偏移*
   startOffset Integer,
   /** 寄存器数量*/
   numberOfRegisters Integer,
@@ -26,7 +26,7 @@ entity MeterCategoryInfo {
   /** 修改时间*/
   updateTime Instant required,
   /** 下发命令*/
-  controlCommands String maxlength(100) 
+  controlCommands String maxlength(100)
 }
 
 /**
@@ -63,7 +63,7 @@ entity MeterInfo {
   /** 修改时间*/
   updateTime Instant required,
   /** 下发命令*/
-  controlCommands String maxlength(100) 
+  controlCommands String maxlength(100)
 }
 
  /**
@@ -78,7 +78,7 @@ entity MeterStatus {
   /** 开关状态*/
   switchStatus Integer,
   /** 记录时间*/
-  recordTime Instant 
+  recordTime Instant
 }
 
  /**
@@ -99,7 +99,7 @@ entity MultiwaySwitchInfo {
   /** 修改时间*/
   updateTime Instant required,
   /** 下发命令*/
-  controlCommands String maxlength(100) 
+  controlCommands String maxlength(100)
 }
 
  /**
@@ -114,7 +114,7 @@ entity MultiwaySwitch {
   /** 开关状态*/
   switchStatus Integer,
   /** 记录时间*/
-  recordTime Instant 
+  recordTime Instant
 }
 
 relationship OneToOne {
@@ -122,6 +122,6 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-  MeterInfo {MeterCategoryInfo  } to MeterCategoryInfo  
+  MeterInfo {MeterCategoryInfo  } to MeterCategoryInfo
 }
 
