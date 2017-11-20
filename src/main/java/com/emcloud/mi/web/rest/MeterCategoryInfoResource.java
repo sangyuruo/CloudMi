@@ -8,10 +8,12 @@ import com.emcloud.mi.web.rest.util.HeaderUtil;
 import com.emcloud.mi.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,9 +93,15 @@ public class MeterCategoryInfoResource {
      */
     @GetMapping("/meter-category-infos")
     @Timed
-    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfos(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfos
+    (@RequestParam(value = "query",required = false) String meterName , @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of MeterCategoryInfos");
-        Page<MeterCategoryInfo> page = meterCategoryInfoService.findAll(pageable);
+        Page<MeterCategoryInfo> page;
+        if(StringUtils.isBlank(meterName)){
+            page = meterCategoryInfoService.findAll(pageable);
+        }else{
+            page = meterCategoryInfoService.findByMeterName(pageable,meterName);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -104,7 +112,7 @@ public class MeterCategoryInfoResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of companies in body
      */
-    @GetMapping("/meter-category-infos")
+    @GetMapping("/meter-category-infos/bymetername")
     @Timed
     public ResponseEntity<List<MeterCategoryInfo>> getAllByMeterName(@ApiParam Pageable pageable,@PathVariable String meterName) {
         log.debug("REST request to get a page of MeterCategoryInfo by MeterName");
