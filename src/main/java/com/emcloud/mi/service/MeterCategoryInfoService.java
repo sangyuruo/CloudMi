@@ -49,6 +49,7 @@ public interface MeterCategoryInfoService {
      *  @return the entity
      */
     Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName);
+
     /**
      *  Delete the "id" meterCategoryInfo.
      *

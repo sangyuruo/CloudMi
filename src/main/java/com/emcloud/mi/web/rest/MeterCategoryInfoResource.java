@@ -107,20 +107,19 @@ public class MeterCategoryInfoResource {
     }
 
     /**
-     * GET  /companies : get all the companies by meterName.
+     * GET  /companies : get all the MeterCategoryInfos by meterName.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of companies in body
+     * @return the ResponseEntity with status 200 (OK) and the list of MeterCategoryInfos in body
      */
-    @GetMapping("/meter-category-infos/bymetername")
+    @GetMapping("/meter-category-infos")
     @Timed
     public ResponseEntity<List<MeterCategoryInfo>> getAllByMeterName(@ApiParam Pageable pageable,@PathVariable String meterName) {
         log.debug("REST request to get a page of MeterCategoryInfo by MeterName");
         Page<MeterCategoryInfo> page = meterCategoryInfoService.findByMeterName(pageable,meterName);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos/bymetername");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 
     /**
      * GET  /meter-category-infos/:id : get the "id" meterCategoryInfo.

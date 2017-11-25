@@ -89,7 +89,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
 
 
     /**
-     *  Get all the companies by meterName .
+     *  Get all the MeterCategoryInfo by meterName .
      *
      *  @param pageable the pagination information
      *  @return the list of entities
@@ -100,7 +100,6 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
         log.debug("Request to get all MeterCategoryInfo by meterName");
         return meterCategoryInfoRepository.findAllByMeterNameContaining(pageable,meterName);
     }
-
 
     /**
      *  Delete the  meterCategoryInfo by id.
