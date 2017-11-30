@@ -17,7 +17,7 @@
     <!--
         Added the entity MeterInfo.
     -->
-    <changeSet id="20171116095415-1" author="jhipster">
+    <changeSet id="20171129105542-1" author="jhipster">
         <createTable tableName="meter_info">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -81,9 +81,7 @@
             <column name="control_commands" type="varchar(100)">
                 <constraints nullable="true" />
             </column>
-            <column name="multiway_switch_info_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>
+
             <column name="meter_category_info_id" type="bigint">
                 <constraints nullable="true" />
             </column>

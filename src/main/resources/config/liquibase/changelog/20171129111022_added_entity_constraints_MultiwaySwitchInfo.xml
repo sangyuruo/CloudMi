@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MultiwaySwitchInfo.
+    -->
+    <changeSet id="20171129111022-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="meter_info_id"
+                                 baseTableName="multiway_switch_info"
+                                 constraintName="fk_multiway_switch_info_meter_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_info"/>
+
+    </changeSet>
+</databaseChangeLog>

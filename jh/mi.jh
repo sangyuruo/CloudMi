@@ -11,7 +11,7 @@ entity MeterCategoryInfo {
   meterFactory String maxlength(100)  required,
   /** 联系方式*/
   tel Integer,
-  /**起始偏移*
+  /**起始偏移*/
   startOffset Integer,
   /** 寄存器数量*/
   numberOfRegisters Integer,
@@ -86,6 +86,8 @@ entity MeterStatus {
  * @author youhong
  */
 entity MultiwaySwitchInfo {
+  /** 多路开关id*/
+  id Integer required,
   /** 设备编码*/
   meterCode String maxlength(64) required,
   /** 开关序号*/
@@ -117,8 +119,8 @@ entity MultiwaySwitch {
   recordTime Instant
 }
 
-relationship OneToOne {
-  MeterInfo{MultiwaySwitchInfo} to MultiwaySwitchInfo
+relationship OneToMany {
+  MeterInfo{MultiwaySwitchInfo} to MultiwaySwitchInfo{MeterInfo}
 }
 
 relationship ManyToOne {

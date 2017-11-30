@@ -1,5 +1,6 @@
 package com.emcloud.mi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -145,9 +148,10 @@ public class MeterInfo implements Serializable {
     @Column(name = "control_commands", length = 100)
     private String controlCommands;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private MultiwaySwitchInfo multiwaySwitchInfo;
+    @OneToMany(mappedBy = "meterInfo")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<MultiwaySwitchInfo> multiwaySwitchInfos = new HashSet<>();
 
     @ManyToOne
     private MeterCategoryInfo meterCategoryInfo;
@@ -356,17 +360,29 @@ public class MeterInfo implements Serializable {
         this.controlCommands = controlCommands;
     }
 
-    public MultiwaySwitchInfo getMultiwaySwitchInfo() {
-        return multiwaySwitchInfo;
+    public Set<MultiwaySwitchInfo> getMultiwaySwitchInfos() {
+        return multiwaySwitchInfos;
     }
 
-    public MeterInfo multiwaySwitchInfo(MultiwaySwitchInfo multiwaySwitchInfo) {
-        this.multiwaySwitchInfo = multiwaySwitchInfo;
+    public MeterInfo multiwaySwitchInfos(Set<MultiwaySwitchInfo> multiwaySwitchInfos) {
+        this.multiwaySwitchInfos = multiwaySwitchInfos;
         return this;
     }
 
-    public void setMultiwaySwitchInfo(MultiwaySwitchInfo multiwaySwitchInfo) {
-        this.multiwaySwitchInfo = multiwaySwitchInfo;
+    public MeterInfo addMultiwaySwitchInfo(MultiwaySwitchInfo multiwaySwitchInfo) {
+        this.multiwaySwitchInfos.add(multiwaySwitchInfo);
+        multiwaySwitchInfo.setMeterInfo(this);
+        return this;
+    }
+
+    public MeterInfo removeMultiwaySwitchInfo(MultiwaySwitchInfo multiwaySwitchInfo) {
+        this.multiwaySwitchInfos.remove(multiwaySwitchInfo);
+        multiwaySwitchInfo.setMeterInfo(null);
+        return this;
+    }
+
+    public void setMultiwaySwitchInfos(Set<MultiwaySwitchInfo> multiwaySwitchInfos) {
+        this.multiwaySwitchInfos = multiwaySwitchInfos;
     }
 
     public MeterCategoryInfo getMeterCategoryInfo() {

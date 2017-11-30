@@ -28,12 +28,12 @@
             "fieldType": "Instant"
         }
     ],
-    "changelogDate": "20171116095416",
+    "changelogDate": "20171129105543",
     "javadoc": "设备状态表\n@author youhong",
     "entityTableName": "meter_status",
     "dto": "no",
-    "pagination": "pager",
-    "service": "serviceImpl",
+    "pagination": "no",
+    "service": "no",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

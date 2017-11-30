@@ -82,6 +82,9 @@ public class MultiwaySwitchInfo implements Serializable {
     @Column(name = "control_commands", length = 100)
     private String controlCommands;
 
+    @ManyToOne
+    private MeterInfo meterInfo;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -180,6 +183,19 @@ public class MultiwaySwitchInfo implements Serializable {
 
     public void setControlCommands(String controlCommands) {
         this.controlCommands = controlCommands;
+    }
+
+    public MeterInfo getMeterInfo() {
+        return meterInfo;
+    }
+
+    public MultiwaySwitchInfo meterInfo(MeterInfo meterInfo) {
+        this.meterInfo = meterInfo;
+        return this;
+    }
+
+    public void setMeterInfo(MeterInfo meterInfo) {
+        this.meterInfo = meterInfo;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

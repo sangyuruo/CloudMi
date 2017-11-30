@@ -2,11 +2,9 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
             "relationshipName": "multiwaySwitchInfo",
             "otherEntityName": "multiwaySwitchInfo",
-            "otherEntityField": "id",
-            "ownerSide": true,
             "otherEntityRelationshipName": "meterInfo"
         },
         {
@@ -143,12 +141,12 @@
             "fieldValidateRulesMaxlength": 100
         }
     ],
-    "changelogDate": "20171116095415",
+    "changelogDate": "20171129105542",
     "javadoc": "设备信息表\n@author youhong",
     "entityTableName": "meter_info",
     "dto": "no",
-    "pagination": "pager",
-    "service": "serviceImpl",
+    "pagination": "no",
+    "service": "no",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

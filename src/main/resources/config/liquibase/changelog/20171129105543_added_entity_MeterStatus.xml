@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity MultiwaySwitch.
+        Added the entity MeterStatus.
     -->
-    <changeSet id="20171116095418-1" author="jhipster">
-        <createTable tableName="multiway_switch">
+    <changeSet id="20171129105543-1" author="jhipster">
+        <createTable tableName="meter_status">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -26,8 +26,8 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="switch_code" type="integer">
-                <constraints nullable="false" />
+            <column name="traffic_status" type="integer">
+                <constraints nullable="true" />
             </column>
 
             <column name="switch_status" type="integer">
@@ -40,7 +40,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="multiway_switch" columnName="record_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="meter_status" columnName="record_time" columnDataType="datetime"/>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

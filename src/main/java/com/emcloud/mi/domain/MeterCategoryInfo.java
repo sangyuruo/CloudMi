@@ -85,7 +85,6 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 创建人
      */
-
     @Size(max = 20)
     @ApiModelProperty(value = "创建人", required = true)
     @Column(name = "created_by", length = 20, nullable = false)
@@ -94,7 +93,6 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 创建时间
      */
-
     @ApiModelProperty(value = "创建时间", required = true)
     @Column(name = "create_time", nullable = false)
     private Instant createTime;
@@ -102,7 +100,6 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 修改人
      */
-
     @Size(max = 20)
     @ApiModelProperty(value = "修改人", required = true)
     @Column(name = "updated_by", length = 20, nullable = false)
@@ -111,7 +108,6 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 修改时间
      */
-
     @ApiModelProperty(value = "修改时间", required = true)
     @Column(name = "update_time", nullable = false)
     private Instant updateTime;

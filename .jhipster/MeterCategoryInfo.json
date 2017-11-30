@@ -98,12 +98,12 @@
             "fieldValidateRulesMaxlength": 100
         }
     ],
-    "changelogDate": "20171116095414",
+    "changelogDate": "20171129105541",
     "javadoc": "设备分类信息表\n@author youhong",
     "entityTableName": "meter_category_info",
     "dto": "no",
-    "pagination": "pager",
-    "service": "serviceImpl",
+    "pagination": "no",
+    "service": "no",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

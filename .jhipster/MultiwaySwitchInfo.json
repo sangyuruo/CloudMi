@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "meterInfo",
+            "otherEntityName": "meterInfo",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "meterCode",
@@ -66,7 +73,7 @@
             "fieldValidateRulesMaxlength": 100
         }
     ],
-    "changelogDate": "20171116095417",
+    "changelogDate": "20171129111022",
     "javadoc": "多路开关信息表\n@author youhong",
     "entityTableName": "multiway_switch_info",
     "dto": "no",

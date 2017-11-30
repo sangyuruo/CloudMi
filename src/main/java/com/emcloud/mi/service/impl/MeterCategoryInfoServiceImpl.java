@@ -57,7 +57,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
         meterCategoryInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         meterCategoryInfo.setUpdateTime(Instant.now());
         return meterCategoryInfoRepository.save(meterCategoryInfo);
-   }
+    }
 
     /**
      *  Get all the meterCategoryInfos.
@@ -83,21 +83,6 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
     public MeterCategoryInfo findOne(Long id) {
         log.debug("Request to get MeterCategoryInfo : {}", id);
         return meterCategoryInfoRepository.findOne(id);
-    }
-
-
-
-    /**
-     *  Get all the MeterCategoryInfo by meterName .
-     *
-     *  @param pageable the pagination information
-     *  @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName) {
-        log.debug("Request to get all MeterCategoryInfo by meterName");
-        return meterCategoryInfoRepository.findAllByMeterNameContaining(pageable,meterName);
     }
 
     /**
