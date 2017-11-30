@@ -8,6 +8,7 @@ import com.emcloud.mi.web.rest.util.HeaderUtil;
 import com.emcloud.mi.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -91,9 +92,15 @@ public class MeterCategoryInfoResource {
      */
     @GetMapping("/meter-category-infos")
     @Timed
-    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfos(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfosByMeterName
+    (@RequestParam(value = "query",required = false) String meterName , @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of MeterCategoryInfos");
-        Page<MeterCategoryInfo> page = meterCategoryInfoService.findAll(pageable);
+        Page<MeterCategoryInfo> page;
+        if(StringUtils.isBlank(meterName)){
+            page = meterCategoryInfoService.findAll(pageable);
+        }else{
+            page = meterCategoryInfoService.findByMeterName(pageable,meterName);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

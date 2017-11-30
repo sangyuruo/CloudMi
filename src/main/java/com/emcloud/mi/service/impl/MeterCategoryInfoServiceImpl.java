@@ -73,6 +73,19 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
     }
 
     /**
+     *  Get all the MeterCategoryInfo by meterName .
+     *
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName) {
+        log.debug("Request to get all MeterCategoryInfo by meterName");
+        return meterCategoryInfoRepository.findAllByMeterNameContaining(pageable,meterName);
+    }
+
+    /**
      *  Get one meterCategoryInfo by id.
      *
      *  @param id the id of the entity
