@@ -73,7 +73,7 @@
             "fieldValidateRulesMaxlength": 100
         }
     ],
-    "changelogDate": "20171129111022",
+    "changelogDate": "20171205062027",
     "javadoc": "多路开关信息表\n@author youhong",
     "entityTableName": "multiway_switch_info",
     "dto": "no",

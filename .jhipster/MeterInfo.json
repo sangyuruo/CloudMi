@@ -71,6 +71,15 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "comPointCode",
+            "javadoc": "串口编码",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
             "fieldName": "meterType",
             "javadoc": "设备类型",
             "fieldType": "String",
@@ -141,12 +150,12 @@
             "fieldValidateRulesMaxlength": 100
         }
     ],
-    "changelogDate": "20171129105542",
+    "changelogDate": "20171205062025",
     "javadoc": "设备信息表\n@author youhong",
     "entityTableName": "meter_info",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }

@@ -81,6 +81,14 @@ public class MeterInfo implements Serializable {
     private String companyCode;
 
     /**
+     * 串口编码
+     */
+    @Size(max = 64)
+    @ApiModelProperty(value = "串口编码")
+    @Column(name = "com_point_code", length = 64)
+    private String comPointCode;
+
+    /**
      * 设备类型
      */
     @NotNull
@@ -113,6 +121,7 @@ public class MeterInfo implements Serializable {
     /**
      * 创建人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "创建人", required = true)
     @Column(name = "created_by", length = 20, nullable = false)
@@ -121,6 +130,7 @@ public class MeterInfo implements Serializable {
     /**
      * 创建时间
      */
+    @NotNull
     @ApiModelProperty(value = "创建时间", required = true)
     @Column(name = "create_time", nullable = false)
     private Instant createTime;
@@ -128,6 +138,7 @@ public class MeterInfo implements Serializable {
     /**
      * 修改人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "修改人", required = true)
     @Column(name = "updated_by", length = 20, nullable = false)
@@ -136,6 +147,7 @@ public class MeterInfo implements Serializable {
     /**
      * 修改时间
      */
+    @NotNull
     @ApiModelProperty(value = "修改时间", required = true)
     @Column(name = "update_time", nullable = false)
     private Instant updateTime;
@@ -241,6 +253,19 @@ public class MeterInfo implements Serializable {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getComPointCode() {
+        return comPointCode;
+    }
+
+    public MeterInfo comPointCode(String comPointCode) {
+        this.comPointCode = comPointCode;
+        return this;
+    }
+
+    public void setComPointCode(String comPointCode) {
+        this.comPointCode = comPointCode;
     }
 
     public String getMeterType() {
@@ -429,6 +454,7 @@ public class MeterInfo implements Serializable {
             ", addressCode='" + getAddressCode() + "'" +
             ", organizationCode='" + getOrganizationCode() + "'" +
             ", companyCode='" + getCompanyCode() + "'" +
+            ", comPointCode='" + getComPointCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
             ", startOffset='" + getStartOffset() + "'" +
             ", numberOfRegisters='" + getNumberOfRegisters() + "'" +

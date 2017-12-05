@@ -61,6 +61,9 @@ public class MeterInfoResourceIntTest {
     private static final String DEFAULT_COMPANY_CODE = "AAAAAAAAAA";
     private static final String UPDATED_COMPANY_CODE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_COM_POINT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_COM_POINT_CODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_METER_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_METER_TYPE = "BBBBBBBBBB";
 
@@ -135,6 +138,7 @@ public class MeterInfoResourceIntTest {
             .addressCode(DEFAULT_ADDRESS_CODE)
             .organizationCode(DEFAULT_ORGANIZATION_CODE)
             .companyCode(DEFAULT_COMPANY_CODE)
+            .comPointCode(DEFAULT_COM_POINT_CODE)
             .meterType(DEFAULT_METER_TYPE)
             .startOffset(DEFAULT_START_OFFSET)
             .numberOfRegisters(DEFAULT_NUMBER_OF_REGISTERS)
@@ -173,6 +177,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getAddressCode()).isEqualTo(DEFAULT_ADDRESS_CODE);
         assertThat(testMeterInfo.getOrganizationCode()).isEqualTo(DEFAULT_ORGANIZATION_CODE);
         assertThat(testMeterInfo.getCompanyCode()).isEqualTo(DEFAULT_COMPANY_CODE);
+        assertThat(testMeterInfo.getComPointCode()).isEqualTo(DEFAULT_COM_POINT_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(DEFAULT_METER_TYPE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(DEFAULT_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(DEFAULT_NUMBER_OF_REGISTERS);
@@ -364,6 +369,7 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].addressCode").value(hasItem(DEFAULT_ADDRESS_CODE.toString())))
             .andExpect(jsonPath("$.[*].organizationCode").value(hasItem(DEFAULT_ORGANIZATION_CODE.toString())))
             .andExpect(jsonPath("$.[*].companyCode").value(hasItem(DEFAULT_COMPANY_CODE.toString())))
+            .andExpect(jsonPath("$.[*].comPointCode").value(hasItem(DEFAULT_COM_POINT_CODE.toString())))
             .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
             .andExpect(jsonPath("$.[*].startOffset").value(hasItem(DEFAULT_START_OFFSET)))
             .andExpect(jsonPath("$.[*].numberOfRegisters").value(hasItem(DEFAULT_NUMBER_OF_REGISTERS)))
@@ -392,6 +398,7 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.addressCode").value(DEFAULT_ADDRESS_CODE.toString()))
             .andExpect(jsonPath("$.organizationCode").value(DEFAULT_ORGANIZATION_CODE.toString()))
             .andExpect(jsonPath("$.companyCode").value(DEFAULT_COMPANY_CODE.toString()))
+            .andExpect(jsonPath("$.comPointCode").value(DEFAULT_COM_POINT_CODE.toString()))
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
             .andExpect(jsonPath("$.startOffset").value(DEFAULT_START_OFFSET))
             .andExpect(jsonPath("$.numberOfRegisters").value(DEFAULT_NUMBER_OF_REGISTERS))
@@ -428,6 +435,7 @@ public class MeterInfoResourceIntTest {
             .addressCode(UPDATED_ADDRESS_CODE)
             .organizationCode(UPDATED_ORGANIZATION_CODE)
             .companyCode(UPDATED_COMPANY_CODE)
+            .comPointCode(UPDATED_COM_POINT_CODE)
             .meterType(UPDATED_METER_TYPE)
             .startOffset(UPDATED_START_OFFSET)
             .numberOfRegisters(UPDATED_NUMBER_OF_REGISTERS)
@@ -453,6 +461,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getAddressCode()).isEqualTo(UPDATED_ADDRESS_CODE);
         assertThat(testMeterInfo.getOrganizationCode()).isEqualTo(UPDATED_ORGANIZATION_CODE);
         assertThat(testMeterInfo.getCompanyCode()).isEqualTo(UPDATED_COMPANY_CODE);
+        assertThat(testMeterInfo.getComPointCode()).isEqualTo(UPDATED_COM_POINT_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(UPDATED_METER_TYPE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(UPDATED_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(UPDATED_NUMBER_OF_REGISTERS);

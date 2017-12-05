@@ -17,7 +17,6 @@ public interface MeterCategoryInfoService {
      */
     MeterCategoryInfo save(MeterCategoryInfo meterCategoryInfo);
 
-
     /**
      * update a meterCategoryInfo.
      *
@@ -34,7 +33,6 @@ public interface MeterCategoryInfoService {
      */
     Page<MeterCategoryInfo> findAll(Pageable pageable);
 
-
     /**
      *  Get the "meterName" meterCategoryInfo.
      *
@@ -42,7 +40,6 @@ public interface MeterCategoryInfoService {
      *  @return the entity
      */
     Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName);
-
 
     /**
      *  Get the "id" meterCategoryInfo.

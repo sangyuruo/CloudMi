@@ -46,6 +46,8 @@ entity MeterInfo {
   organizationCode String maxlength(64),
   /** 公司编码*/
   companyCode String maxlength(64),
+  /** 串口编码*/
+  comPointCode String maxlength(64),
   /** 设备类型*/
   meterType String maxlength(50) required,
   /** 起始偏移*/

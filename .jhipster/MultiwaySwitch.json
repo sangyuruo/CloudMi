@@ -31,12 +31,12 @@
             "fieldType": "Instant"
         }
     ],
-    "changelogDate": "20171129105545",
+    "changelogDate": "20171205062028",
     "javadoc": "多路开关状态表\n@author youhong",
     "entityTableName": "multiway_switch",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
+    "pagination": "pager",
+    "service": "serviceImpl",
     "jpaMetamodelFiltering": false,
     "microserviceName": "EmCloudMi"
 }
