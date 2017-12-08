@@ -4,6 +4,8 @@ import com.emcloud.mi.domain.MeterInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing MeterInfo.
  */
@@ -32,6 +34,14 @@ public interface MeterInfoService {
      *  @return the list of entities
      */
     Page<MeterInfo> findAll(Pageable pageable);
+
+    /**
+     *  Get all the meterInfos.
+     *
+     *  @param comPointCode the pagination information
+     *  @return the list of entities
+     */
+    List<MeterInfo> findAllByComPointCode(String comPointCode);
 
     /**
      *  Get the "id" meterInfo.

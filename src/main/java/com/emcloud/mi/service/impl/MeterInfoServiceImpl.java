@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 
 /**
@@ -70,6 +71,19 @@ public class MeterInfoServiceImpl implements MeterInfoService{
     public Page<MeterInfo> findAll(Pageable pageable) {
         log.debug("Request to get all MeterInfos");
         return meterInfoRepository.findAll(pageable);
+    }
+
+    /**
+     *  Get all the meterInfos.
+     *
+     *  @param comPointCode the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<MeterInfo> findAllByComPointCode(String comPointCode){
+        log.debug("Request to get all MeterInfo by comPointCode");
+        return meterInfoRepository.findAllByComPointCode(comPointCode);
     }
 
     /**
