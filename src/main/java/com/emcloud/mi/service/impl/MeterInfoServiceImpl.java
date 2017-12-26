@@ -54,7 +54,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
      */
     @Override
     public MeterInfo update(MeterInfo meterInfo) {
-        log.debug("Request to save Company : {}", meterInfo);
+        log.debug("Request to save MeterInfo : {}", meterInfo);
         meterInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         meterInfo.setUpdateTime(Instant.now());
         return meterInfoRepository.save(meterInfo);

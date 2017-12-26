@@ -53,7 +53,7 @@ public class MultiwaySwitchInfoServiceImpl implements MultiwaySwitchInfoService{
      */
     @Override
     public MultiwaySwitchInfo update(MultiwaySwitchInfo multiwaySwitchInfo) {
-        log.debug("Request to save Company : {}", multiwaySwitchInfo);
+        log.debug("Request to save MultiwaySwitchInfo : {}", multiwaySwitchInfo);
         multiwaySwitchInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         multiwaySwitchInfo.setUpdateTime(Instant.now());
         return multiwaySwitchInfoRepository.save(multiwaySwitchInfo);

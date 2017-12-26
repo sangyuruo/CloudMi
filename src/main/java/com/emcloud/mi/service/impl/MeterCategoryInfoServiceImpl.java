@@ -53,7 +53,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
      */
     @Override
     public MeterCategoryInfo update(MeterCategoryInfo meterCategoryInfo) {
-        log.debug("Request to save Company : {}", meterCategoryInfo);
+        log.debug("Request to save MeterCategoryInfo : {}", meterCategoryInfo);
         meterCategoryInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         meterCategoryInfo.setUpdateTime(Instant.now());
         return meterCategoryInfoRepository.save(meterCategoryInfo);

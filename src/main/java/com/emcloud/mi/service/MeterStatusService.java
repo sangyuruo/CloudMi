@@ -1,5 +1,6 @@
 package com.emcloud.mi.service;
 
+import com.emcloud.mi.domain.MeterInfo;
 import com.emcloud.mi.domain.MeterStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,13 @@ public interface MeterStatusService {
      */
     MeterStatus save(MeterStatus meterStatus);
 
+    /**
+     * update a meterStatus.
+     *
+     * @param meterStatus the entity to update
+     * @return the persisted entity
+     */
+    MeterStatus update(MeterStatus meterStatus);
     /**
      *  Get all the meterStatuses.
      *

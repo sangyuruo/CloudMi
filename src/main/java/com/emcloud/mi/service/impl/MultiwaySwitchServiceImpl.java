@@ -1,5 +1,6 @@
 package com.emcloud.mi.service.impl;
 
+import com.emcloud.mi.domain.MeterStatus;
 import com.emcloud.mi.service.MultiwaySwitchService;
 import com.emcloud.mi.domain.MultiwaySwitch;
 import com.emcloud.mi.repository.MultiwaySwitchRepository;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 
 
 /**
@@ -35,6 +38,20 @@ public class MultiwaySwitchServiceImpl implements MultiwaySwitchService{
     @Override
     public MultiwaySwitch save(MultiwaySwitch multiwaySwitch) {
         log.debug("Request to save MultiwaySwitch : {}", multiwaySwitch);
+        multiwaySwitch.setRecordTime(Instant.now());
+        return multiwaySwitchRepository.save(multiwaySwitch);
+    }
+
+    /**
+     * update a multiwaySwitch.
+     *
+     * @param multiwaySwitch the entity to update
+     * @return the persisted entity
+     */
+    @Override
+    public MultiwaySwitch update(MultiwaySwitch multiwaySwitch) {
+        log.debug("Request to save MultiwaySwitch : {}", multiwaySwitch);
+        multiwaySwitch.setRecordTime(Instant.now());
         return multiwaySwitchRepository.save(multiwaySwitch);
     }
 
