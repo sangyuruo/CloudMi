@@ -25,7 +25,9 @@
             <column name="meter_name" type="varchar(64)">
                 <constraints nullable="false" />
             </column>
-
+            <column name="meter_type_code" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="meter_type" type="varchar(100)">
                 <constraints nullable="false" />
             </column>

@@ -13,6 +13,11 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "meterTypeCode",
+            "javadoc": "设备类型代码",
+            "fieldType": "Integer"
+        },
+        {
             "fieldName": "meterType",
             "javadoc": "设备类型",
             "fieldType": "String",

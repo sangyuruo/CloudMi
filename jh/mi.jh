@@ -5,6 +5,8 @@
 entity MeterCategoryInfo {
   /** 设备名称*/
   meterName String maxlength(64) required,
+  /** 设备类型代码*/
+  meterTypeCode Integer,
   /** 设备类型*/
   meterType String maxlength(100)  required,
   /** 设备生产厂家*/

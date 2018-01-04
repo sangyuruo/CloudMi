@@ -107,7 +107,7 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/by-com-point-code")
     @Timed
     public List<MeterInfo> getAllMeterInfosByComPointCode
-    (@RequestParam(value = "comPointCode",required = false) String comPointCode ) {
+        (@RequestParam(value = "comPointCode",required = false) String comPointCode ) {
         log.debug("REST comPointCode to get a page of MeterInfo");
         List<MeterInfo> list = meterInfoService.findAllByComPointCode(comPointCode);
         return list;

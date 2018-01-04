@@ -37,6 +37,13 @@ public class MeterCategoryInfo implements Serializable {
     private String meterName;
 
     /**
+     * 设备类型代码
+     */
+    @ApiModelProperty(value = "设备类型代码")
+    @Column(name = "meter_type_code")
+    private Integer meterTypeCode;
+
+    /**
      * 设备类型
      */
     @NotNull
@@ -140,6 +147,19 @@ public class MeterCategoryInfo implements Serializable {
 
     public void setMeterName(String meterName) {
         this.meterName = meterName;
+    }
+
+    public Integer getMeterTypeCode() {
+        return meterTypeCode;
+    }
+
+    public MeterCategoryInfo meterTypeCode(Integer meterTypeCode) {
+        this.meterTypeCode = meterTypeCode;
+        return this;
+    }
+
+    public void setMeterTypeCode(Integer meterTypeCode) {
+        this.meterTypeCode = meterTypeCode;
     }
 
     public String getMeterType() {
@@ -311,6 +331,7 @@ public class MeterCategoryInfo implements Serializable {
         return "MeterCategoryInfo{" +
             "id=" + getId() +
             ", meterName='" + getMeterName() + "'" +
+            ", meterName='" + getMeterTypeCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
             ", meterFactory='" + getMeterFactory() + "'" +
             ", tel='" + getTel() + "'" +
