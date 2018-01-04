@@ -104,10 +104,10 @@ public class MeterInfoResource {
      * @param comPointCode the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
      */
-    @GetMapping("/meter-infos/bycomPointCode")
+    @GetMapping("/meter-infos/by-com-point-code")
     @Timed
     public List<MeterInfo> getAllMeterInfosByComPointCode
-    (@RequestParam(value = "query",required = false) String comPointCode ) {
+    (@RequestParam(value = "comPointCode",required = false) String comPointCode ) {
         log.debug("REST comPointCode to get a page of MeterInfo");
         List<MeterInfo> list = meterInfoService.findAllByComPointCode(comPointCode);
         return list;
