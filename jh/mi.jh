@@ -58,7 +58,7 @@ entity MeterInfo {
   companyCode String maxlength(64),
   /** 串口编码*/
   comPointCode String maxlength(64),
-  /** 设备类型代码*/
+  /** 设备分类代码*/
   meterTypeCode Integer required,
   /** 设备类型*/
   meterType String maxlength(50) required,
@@ -82,8 +82,8 @@ entity MeterInfo {
   bigEndian String maxlength(100),
   /** 允许重复*/
   allowDuplicate Boolean ,
-  /** 计算*/
-  Calculates Integer
+  /** 计算*/Integer
+  Calculates
 }
 
  /**
