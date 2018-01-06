@@ -89,6 +89,14 @@ public class MeterInfo implements Serializable {
     private String comPointCode;
 
     /**
+     * 设备类型代码
+     */
+    @NotNull
+    @ApiModelProperty(value = "设备类型代码", required = true)
+    @Column(name = "meter_type_code", nullable = false)
+    private Integer meterTypeCode;
+
+    /**
      * 设备类型
      */
     @NotNull
@@ -121,6 +129,7 @@ public class MeterInfo implements Serializable {
     /**
      * 创建人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "创建人", required = true)
     @Column(name = "created_by", length = 20, nullable = false)
@@ -129,6 +138,7 @@ public class MeterInfo implements Serializable {
     /**
      * 创建时间
      */
+    @NotNull
     @ApiModelProperty(value = "创建时间", required = true)
     @Column(name = "create_time", nullable = false)
     private Instant createTime;
@@ -136,6 +146,7 @@ public class MeterInfo implements Serializable {
     /**
      * 修改人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "修改人", required = true)
     @Column(name = "updated_by", length = 20, nullable = false)
@@ -144,6 +155,7 @@ public class MeterInfo implements Serializable {
     /**
      * 修改时间
      */
+    @NotNull
     @ApiModelProperty(value = "修改时间", required = true)
     @Column(name = "update_time", nullable = false)
     private Instant updateTime;
@@ -155,6 +167,28 @@ public class MeterInfo implements Serializable {
     @ApiModelProperty(value = "下发命令")
     @Column(name = "control_commands", length = 100)
     private String controlCommands;
+
+    /**
+     * 大Endian
+     */
+    @Size(max = 100)
+    @ApiModelProperty(value = "大Endian")
+    @Column(name = "big_endian", length = 100)
+    private String bigEndian;
+
+    /**
+     * 允许重复
+     */
+    @ApiModelProperty(value = "允许重复")
+    @Column(name = "allow_duplicate")
+    private Boolean allowDuplicate;
+
+    /**
+     * 计算
+     */
+    @ApiModelProperty(value = "计算")
+    @Column(name = "calculates")
+    private Integer calculates;
 
     @OneToMany(mappedBy = "meterInfo")
     @JsonIgnore
@@ -262,6 +296,19 @@ public class MeterInfo implements Serializable {
 
     public void setComPointCode(String comPointCode) {
         this.comPointCode = comPointCode;
+    }
+
+    public Integer getMeterTypeCode() {
+        return meterTypeCode;
+    }
+
+    public MeterInfo meterTypeCode(Integer meterTypeCode) {
+        this.meterTypeCode = meterTypeCode;
+        return this;
+    }
+
+    public void setMeterTypeCode(Integer meterTypeCode) {
+        this.meterTypeCode = meterTypeCode;
     }
 
     public String getMeterType() {
@@ -381,6 +428,45 @@ public class MeterInfo implements Serializable {
         this.controlCommands = controlCommands;
     }
 
+    public String getBigEndian() {
+        return bigEndian;
+    }
+
+    public MeterInfo bigEndian(String bigEndian) {
+        this.bigEndian = bigEndian;
+        return this;
+    }
+
+    public void setBigEndian(String bigEndian) {
+        this.bigEndian = bigEndian;
+    }
+
+    public Boolean isAllowDuplicate() {
+        return allowDuplicate;
+    }
+
+    public MeterInfo allowDuplicate(Boolean allowDuplicate) {
+        this.allowDuplicate = allowDuplicate;
+        return this;
+    }
+
+    public void setAllowDuplicate(Boolean allowDuplicate) {
+        this.allowDuplicate = allowDuplicate;
+    }
+
+    public Integer getCalculates() {
+        return calculates;
+    }
+
+    public MeterInfo calculates(Integer calculates) {
+        this.calculates = calculates;
+        return this;
+    }
+
+    public void setCalculates(Integer calculates) {
+        this.calculates = calculates;
+    }
+
     public Set<MultiwaySwitchInfo> getMultiwaySwitchInfos() {
         return multiwaySwitchInfos;
     }
@@ -451,6 +537,7 @@ public class MeterInfo implements Serializable {
             ", organizationCode='" + getOrganizationCode() + "'" +
             ", companyCode='" + getCompanyCode() + "'" +
             ", comPointCode='" + getComPointCode() + "'" +
+            ", meterTypeCode='" + getMeterTypeCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
             ", startOffset='" + getStartOffset() + "'" +
             ", numberOfRegisters='" + getNumberOfRegisters() + "'" +
@@ -460,6 +547,9 @@ public class MeterInfo implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             ", updateTime='" + getUpdateTime() + "'" +
             ", controlCommands='" + getControlCommands() + "'" +
+            ", bigEndian='" + getBigEndian() + "'" +
+            ", allowDuplicate='" + isAllowDuplicate() + "'" +
+            ", calculates='" + getCalculates() + "'" +
             "}";
     }
 }

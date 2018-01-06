@@ -28,29 +28,47 @@ public class MeterCategoryInfo implements Serializable {
     private Long id;
 
     /**
-     * 设备名称
+     * 设备分类代码
      */
     @NotNull
-    @Size(max = 64)
-    @ApiModelProperty(value = "设备名称", required = true)
-    @Column(name = "meter_name", length = 64, nullable = false)
-    private String meterName;
-
-    /**
-     * 设备类型代码
-     */
-    @ApiModelProperty(value = "设备类型代码")
-    @Column(name = "meter_type_code")
+    @ApiModelProperty(value = "设备分类代码", required = true)
+    @Column(name = "meter_type_code", nullable = false)
     private Integer meterTypeCode;
 
     /**
-     * 设备类型
+     * 设备分类
+     */
+    @NotNull
+    @Size(max = 64)
+    @ApiModelProperty(value = "设备分类", required = true)
+    @Column(name = "meter_type", length = 64, nullable = false)
+    private String meterType;
+
+    /**
+     * 设备大类代码
+     */
+    @NotNull
+    @ApiModelProperty(value = "设备大类代码", required = true)
+    @Column(name = "dict_code", nullable = false)
+    private Integer dictCode;
+
+    /**
+     * 设备大类名称
      */
     @NotNull
     @Size(max = 100)
-    @ApiModelProperty(value = "设备类型", required = true)
-    @Column(name = "meter_type", length = 100, nullable = false)
-    private String meterType;
+    @ApiModelProperty(value = "设备大类名称", required = true)
+    @Column(name = "dict_name", length = 100, nullable = false)
+    private String dictName;
+
+    /**
+     * 功能码
+     */
+    @NotNull
+    @Size(max = 100)
+    @ApiModelProperty(value = "功能码", required = true)
+    @Column(name = "function_code", length = 100, nullable = false)
+    private String functionCode;
 
     /**
      * 设备生产厂家
@@ -92,6 +110,7 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 创建人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "创建人", required = true)
     @Column(name = "created_by", length = 20, nullable = false)
@@ -100,6 +119,7 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 创建时间
      */
+    @NotNull
     @ApiModelProperty(value = "创建时间", required = true)
     @Column(name = "create_time", nullable = false)
     private Instant createTime;
@@ -107,6 +127,7 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 修改人
      */
+    @NotNull
     @Size(max = 20)
     @ApiModelProperty(value = "修改人", required = true)
     @Column(name = "updated_by", length = 20, nullable = false)
@@ -115,6 +136,7 @@ public class MeterCategoryInfo implements Serializable {
     /**
      * 修改时间
      */
+    @NotNull
     @ApiModelProperty(value = "修改时间", required = true)
     @Column(name = "update_time", nullable = false)
     private Instant updateTime;
@@ -127,6 +149,21 @@ public class MeterCategoryInfo implements Serializable {
     @Column(name = "control_commands", length = 100)
     private String controlCommands;
 
+    /**
+     * 长码
+     */
+    @ApiModelProperty(value = "长码")
+    @Column(name = "long_code")
+    private Integer longCode;
+
+    /**
+     * 是否有效
+     */
+    @NotNull
+    @ApiModelProperty(value = "是否有效", required = true)
+    @Column(name = "jhi_enable", nullable = false)
+    private Boolean enable;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -134,19 +171,6 @@ public class MeterCategoryInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getMeterName() {
-        return meterName;
-    }
-
-    public MeterCategoryInfo meterName(String meterName) {
-        this.meterName = meterName;
-        return this;
-    }
-
-    public void setMeterName(String meterName) {
-        this.meterName = meterName;
     }
 
     public Integer getMeterTypeCode() {
@@ -173,6 +197,45 @@ public class MeterCategoryInfo implements Serializable {
 
     public void setMeterType(String meterType) {
         this.meterType = meterType;
+    }
+
+    public Integer getDictCode() {
+        return dictCode;
+    }
+
+    public MeterCategoryInfo dictCode(Integer dictCode) {
+        this.dictCode = dictCode;
+        return this;
+    }
+
+    public void setDictCode(Integer dictCode) {
+        this.dictCode = dictCode;
+    }
+
+    public String getDictName() {
+        return dictName;
+    }
+
+    public MeterCategoryInfo dictName(String dictName) {
+        this.dictName = dictName;
+        return this;
+    }
+
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
+    }
+
+    public String getFunctionCode() {
+        return functionCode;
+    }
+
+    public MeterCategoryInfo functionCode(String functionCode) {
+        this.functionCode = functionCode;
+        return this;
+    }
+
+    public void setFunctionCode(String functionCode) {
+        this.functionCode = functionCode;
     }
 
     public String getMeterFactory() {
@@ -304,6 +367,32 @@ public class MeterCategoryInfo implements Serializable {
     public void setControlCommands(String controlCommands) {
         this.controlCommands = controlCommands;
     }
+
+    public Integer getLongCode() {
+        return longCode;
+    }
+
+    public MeterCategoryInfo longCode(Integer longCode) {
+        this.longCode = longCode;
+        return this;
+    }
+
+    public void setLongCode(Integer longCode) {
+        this.longCode = longCode;
+    }
+
+    public Boolean isEnable() {
+        return enable;
+    }
+
+    public MeterCategoryInfo enable(Boolean enable) {
+        this.enable = enable;
+        return this;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -330,9 +419,11 @@ public class MeterCategoryInfo implements Serializable {
     public String toString() {
         return "MeterCategoryInfo{" +
             "id=" + getId() +
-            ", meterName='" + getMeterName() + "'" +
-            ", meterName='" + getMeterTypeCode() + "'" +
+            ", meterTypeCode='" + getMeterTypeCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
+            ", dictCode='" + getDictCode() + "'" +
+            ", dictName='" + getDictName() + "'" +
+            ", functionCode='" + getFunctionCode() + "'" +
             ", meterFactory='" + getMeterFactory() + "'" +
             ", tel='" + getTel() + "'" +
             ", startOffset='" + getStartOffset() + "'" +
@@ -343,6 +434,8 @@ public class MeterCategoryInfo implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             ", updateTime='" + getUpdateTime() + "'" +
             ", controlCommands='" + getControlCommands() + "'" +
+            ", longCode='" + getLongCode() + "'" +
+            ", enable='" + isEnable() + "'" +
             "}";
     }
 }

@@ -77,7 +77,7 @@ public class MeterInfoResource {
         if (meterInfo.getId() == null) {
             return createMeterInfo(meterInfo);
         }
-        MeterInfo result = meterInfoService.update(meterInfo);
+        MeterInfo result = meterInfoService.save(meterInfo);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, meterInfo.getId().toString()))
             .body(result);
@@ -98,20 +98,6 @@ public class MeterInfoResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    /**
-     * GET  /meter-infos : get all the meterInfos.
-     *
-     * @param comPointCode the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
-     */
-    @GetMapping("/meter-infos/by-com-point-code")
-    @Timed
-    public List<MeterInfo> getAllMeterInfosByComPointCode
-        (@RequestParam(value = "comPointCode",required = false) String comPointCode ) {
-        log.debug("REST comPointCode to get a page of MeterInfo");
-        List<MeterInfo> list = meterInfoService.findAllByComPointCode(comPointCode);
-        return list;
-    }
     /**
      * GET  /meter-infos/:id : get the "id" meterInfo.
      *

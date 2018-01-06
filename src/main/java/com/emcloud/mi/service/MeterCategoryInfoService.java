@@ -34,12 +34,12 @@ public interface MeterCategoryInfoService {
     Page<MeterCategoryInfo> findAll(Pageable pageable);
 
     /**
-     *  Get the "meterName" meterCategoryInfo.
+     *  Get the "meterType" meterCategoryInfo.
      *
-     *  @param meterName the id of the entity
+     *  @param meterType the id of the entity
      *  @return the entity
      */
-    Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName);
+    Page<MeterCategoryInfo> findByMeterType(Pageable pageable,String meterType);
 
     /**
      *  Get the "id" meterCategoryInfo.

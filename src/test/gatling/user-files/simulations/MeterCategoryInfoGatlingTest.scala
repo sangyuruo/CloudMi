@@ -80,7 +80,7 @@ class MeterCategoryInfoGatlingTest extends Simulation {
             .exec(http("Create new meterCategoryInfo")
             .post("/emcloudmi/api/meter-category-infos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "meterName":"SAMPLE_TEXT", "meterType":"SAMPLE_TEXT", "meterFactory":"SAMPLE_TEXT", "tel":"0", "startOffset":"0", "numberOfRegisters":"0", "controlAddress":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "meterTypeCode":"0", "meterType":"SAMPLE_TEXT", "dictCode":"0", "dictName":"SAMPLE_TEXT", "functionCode":"SAMPLE_TEXT", "meterFactory":"SAMPLE_TEXT", "tel":"0", "startOffset":"0", "numberOfRegisters":"0", "controlAddress":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT", "longCode":"0", "enable":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_meterCategoryInfo_url"))).exitHereIfFailed
             .pause(10)

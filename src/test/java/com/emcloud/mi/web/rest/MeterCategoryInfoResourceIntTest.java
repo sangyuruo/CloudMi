@@ -43,11 +43,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {EmCloudMiApp.class, SecurityBeanOverrideConfiguration.class})
 public class MeterCategoryInfoResourceIntTest {
 
-    private static final String DEFAULT_METER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_METER_NAME = "BBBBBBBBBB";
+    private static final Integer DEFAULT_METER_TYPE_CODE = 1;
+    private static final Integer UPDATED_METER_TYPE_CODE = 2;
 
     private static final String DEFAULT_METER_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_METER_TYPE = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_DICT_CODE = 1;
+    private static final Integer UPDATED_DICT_CODE = 2;
+
+    private static final String DEFAULT_DICT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_DICT_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FUNCTION_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_FUNCTION_CODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_METER_FACTORY = "AAAAAAAAAA";
     private static final String UPDATED_METER_FACTORY = "BBBBBBBBBB";
@@ -78,6 +87,12 @@ public class MeterCategoryInfoResourceIntTest {
 
     private static final String DEFAULT_CONTROL_COMMANDS = "AAAAAAAAAA";
     private static final String UPDATED_CONTROL_COMMANDS = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_LONG_CODE = 1;
+    private static final Integer UPDATED_LONG_CODE = 2;
+
+    private static final Boolean DEFAULT_ENABLE = false;
+    private static final Boolean UPDATED_ENABLE = true;
 
     @Autowired
     private MeterCategoryInfoRepository meterCategoryInfoRepository;
@@ -120,8 +135,11 @@ public class MeterCategoryInfoResourceIntTest {
      */
     public static MeterCategoryInfo createEntity(EntityManager em) {
         MeterCategoryInfo meterCategoryInfo = new MeterCategoryInfo()
-            .meterName(DEFAULT_METER_NAME)
+            .meterTypeCode(DEFAULT_METER_TYPE_CODE)
             .meterType(DEFAULT_METER_TYPE)
+            .dictCode(DEFAULT_DICT_CODE)
+            .dictName(DEFAULT_DICT_NAME)
+            .functionCode(DEFAULT_FUNCTION_CODE)
             .meterFactory(DEFAULT_METER_FACTORY)
             .tel(DEFAULT_TEL)
             .startOffset(DEFAULT_START_OFFSET)
@@ -131,7 +149,9 @@ public class MeterCategoryInfoResourceIntTest {
             .createTime(DEFAULT_CREATE_TIME)
             .updatedBy(DEFAULT_UPDATED_BY)
             .updateTime(DEFAULT_UPDATE_TIME)
-            .controlCommands(DEFAULT_CONTROL_COMMANDS);
+            .controlCommands(DEFAULT_CONTROL_COMMANDS)
+            .longCode(DEFAULT_LONG_CODE)
+            .enable(DEFAULT_ENABLE);
         return meterCategoryInfo;
     }
 
@@ -155,8 +175,11 @@ public class MeterCategoryInfoResourceIntTest {
         List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
         assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeCreate + 1);
         MeterCategoryInfo testMeterCategoryInfo = meterCategoryInfoList.get(meterCategoryInfoList.size() - 1);
-        assertThat(testMeterCategoryInfo.getMeterName()).isEqualTo(DEFAULT_METER_NAME);
+        assertThat(testMeterCategoryInfo.getMeterTypeCode()).isEqualTo(DEFAULT_METER_TYPE_CODE);
         assertThat(testMeterCategoryInfo.getMeterType()).isEqualTo(DEFAULT_METER_TYPE);
+        assertThat(testMeterCategoryInfo.getDictCode()).isEqualTo(DEFAULT_DICT_CODE);
+        assertThat(testMeterCategoryInfo.getDictName()).isEqualTo(DEFAULT_DICT_NAME);
+        assertThat(testMeterCategoryInfo.getFunctionCode()).isEqualTo(DEFAULT_FUNCTION_CODE);
         assertThat(testMeterCategoryInfo.getMeterFactory()).isEqualTo(DEFAULT_METER_FACTORY);
         assertThat(testMeterCategoryInfo.getTel()).isEqualTo(DEFAULT_TEL);
         assertThat(testMeterCategoryInfo.getStartOffset()).isEqualTo(DEFAULT_START_OFFSET);
@@ -167,6 +190,8 @@ public class MeterCategoryInfoResourceIntTest {
         assertThat(testMeterCategoryInfo.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
         assertThat(testMeterCategoryInfo.getUpdateTime()).isEqualTo(DEFAULT_UPDATE_TIME);
         assertThat(testMeterCategoryInfo.getControlCommands()).isEqualTo(DEFAULT_CONTROL_COMMANDS);
+        assertThat(testMeterCategoryInfo.getLongCode()).isEqualTo(DEFAULT_LONG_CODE);
+        assertThat(testMeterCategoryInfo.isEnable()).isEqualTo(DEFAULT_ENABLE);
     }
 
     @Test
@@ -190,10 +215,10 @@ public class MeterCategoryInfoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMeterNameIsRequired() throws Exception {
+    public void checkMeterTypeCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
         // set the field null
-        meterCategoryInfo.setMeterName(null);
+        meterCategoryInfo.setMeterTypeCode(null);
 
         // Create the MeterCategoryInfo, which fails.
 
@@ -212,6 +237,60 @@ public class MeterCategoryInfoResourceIntTest {
         int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
         // set the field null
         meterCategoryInfo.setMeterType(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDictCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setDictCode(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDictNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setDictName(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFunctionCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setFunctionCode(null);
 
         // Create the MeterCategoryInfo, which fails.
 
@@ -316,6 +395,24 @@ public class MeterCategoryInfoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkEnableIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setEnable(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMeterCategoryInfos() throws Exception {
         // Initialize the database
         meterCategoryInfoRepository.saveAndFlush(meterCategoryInfo);
@@ -325,8 +422,11 @@ public class MeterCategoryInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(meterCategoryInfo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].meterName").value(hasItem(DEFAULT_METER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].meterTypeCode").value(hasItem(DEFAULT_METER_TYPE_CODE)))
             .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].dictCode").value(hasItem(DEFAULT_DICT_CODE)))
+            .andExpect(jsonPath("$.[*].dictName").value(hasItem(DEFAULT_DICT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].functionCode").value(hasItem(DEFAULT_FUNCTION_CODE.toString())))
             .andExpect(jsonPath("$.[*].meterFactory").value(hasItem(DEFAULT_METER_FACTORY.toString())))
             .andExpect(jsonPath("$.[*].tel").value(hasItem(DEFAULT_TEL)))
             .andExpect(jsonPath("$.[*].startOffset").value(hasItem(DEFAULT_START_OFFSET)))
@@ -336,7 +436,9 @@ public class MeterCategoryInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].createTime").value(hasItem(DEFAULT_CREATE_TIME.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
             .andExpect(jsonPath("$.[*].updateTime").value(hasItem(DEFAULT_UPDATE_TIME.toString())))
-            .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())));
+            .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())))
+            .andExpect(jsonPath("$.[*].longCode").value(hasItem(DEFAULT_LONG_CODE)))
+            .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())));
     }
 
     @Test
@@ -350,8 +452,11 @@ public class MeterCategoryInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(meterCategoryInfo.getId().intValue()))
-            .andExpect(jsonPath("$.meterName").value(DEFAULT_METER_NAME.toString()))
+            .andExpect(jsonPath("$.meterTypeCode").value(DEFAULT_METER_TYPE_CODE))
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
+            .andExpect(jsonPath("$.dictCode").value(DEFAULT_DICT_CODE))
+            .andExpect(jsonPath("$.dictName").value(DEFAULT_DICT_NAME.toString()))
+            .andExpect(jsonPath("$.functionCode").value(DEFAULT_FUNCTION_CODE.toString()))
             .andExpect(jsonPath("$.meterFactory").value(DEFAULT_METER_FACTORY.toString()))
             .andExpect(jsonPath("$.tel").value(DEFAULT_TEL))
             .andExpect(jsonPath("$.startOffset").value(DEFAULT_START_OFFSET))
@@ -361,7 +466,9 @@ public class MeterCategoryInfoResourceIntTest {
             .andExpect(jsonPath("$.createTime").value(DEFAULT_CREATE_TIME.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
             .andExpect(jsonPath("$.updateTime").value(DEFAULT_UPDATE_TIME.toString()))
-            .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()));
+            .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()))
+            .andExpect(jsonPath("$.longCode").value(DEFAULT_LONG_CODE))
+            .andExpect(jsonPath("$.enable").value(DEFAULT_ENABLE.booleanValue()));
     }
 
     @Test
@@ -383,8 +490,11 @@ public class MeterCategoryInfoResourceIntTest {
         // Update the meterCategoryInfo
         MeterCategoryInfo updatedMeterCategoryInfo = meterCategoryInfoRepository.findOne(meterCategoryInfo.getId());
         updatedMeterCategoryInfo
-            .meterName(UPDATED_METER_NAME)
+            .meterTypeCode(UPDATED_METER_TYPE_CODE)
             .meterType(UPDATED_METER_TYPE)
+            .dictCode(UPDATED_DICT_CODE)
+            .dictName(UPDATED_DICT_NAME)
+            .functionCode(UPDATED_FUNCTION_CODE)
             .meterFactory(UPDATED_METER_FACTORY)
             .tel(UPDATED_TEL)
             .startOffset(UPDATED_START_OFFSET)
@@ -394,7 +504,9 @@ public class MeterCategoryInfoResourceIntTest {
             .createTime(UPDATED_CREATE_TIME)
             .updatedBy(UPDATED_UPDATED_BY)
             .updateTime(UPDATED_UPDATE_TIME)
-            .controlCommands(UPDATED_CONTROL_COMMANDS);
+            .controlCommands(UPDATED_CONTROL_COMMANDS)
+            .longCode(UPDATED_LONG_CODE)
+            .enable(UPDATED_ENABLE);
 
         restMeterCategoryInfoMockMvc.perform(put("/api/meter-category-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -405,8 +517,11 @@ public class MeterCategoryInfoResourceIntTest {
         List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
         assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeUpdate);
         MeterCategoryInfo testMeterCategoryInfo = meterCategoryInfoList.get(meterCategoryInfoList.size() - 1);
-        assertThat(testMeterCategoryInfo.getMeterName()).isEqualTo(UPDATED_METER_NAME);
+        assertThat(testMeterCategoryInfo.getMeterTypeCode()).isEqualTo(UPDATED_METER_TYPE_CODE);
         assertThat(testMeterCategoryInfo.getMeterType()).isEqualTo(UPDATED_METER_TYPE);
+        assertThat(testMeterCategoryInfo.getDictCode()).isEqualTo(UPDATED_DICT_CODE);
+        assertThat(testMeterCategoryInfo.getDictName()).isEqualTo(UPDATED_DICT_NAME);
+        assertThat(testMeterCategoryInfo.getFunctionCode()).isEqualTo(UPDATED_FUNCTION_CODE);
         assertThat(testMeterCategoryInfo.getMeterFactory()).isEqualTo(UPDATED_METER_FACTORY);
         assertThat(testMeterCategoryInfo.getTel()).isEqualTo(UPDATED_TEL);
         assertThat(testMeterCategoryInfo.getStartOffset()).isEqualTo(UPDATED_START_OFFSET);
@@ -417,6 +532,8 @@ public class MeterCategoryInfoResourceIntTest {
         assertThat(testMeterCategoryInfo.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
         assertThat(testMeterCategoryInfo.getUpdateTime()).isEqualTo(UPDATED_UPDATE_TIME);
         assertThat(testMeterCategoryInfo.getControlCommands()).isEqualTo(UPDATED_CONTROL_COMMANDS);
+        assertThat(testMeterCategoryInfo.getLongCode()).isEqualTo(UPDATED_LONG_CODE);
+        assertThat(testMeterCategoryInfo.isEnable()).isEqualTo(UPDATED_ENABLE);
     }
 
     @Test

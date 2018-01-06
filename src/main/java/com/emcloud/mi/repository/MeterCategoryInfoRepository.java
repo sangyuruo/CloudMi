@@ -14,5 +14,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface MeterCategoryInfoRepository extends JpaRepository<MeterCategoryInfo, Long> {
-    Page<MeterCategoryInfo> findAllByMeterNameContaining(Pageable pageable, String meterName);
+    Page<MeterCategoryInfo> findAllByMeterTypeContaining(Pageable pageable, String meterType);
 }

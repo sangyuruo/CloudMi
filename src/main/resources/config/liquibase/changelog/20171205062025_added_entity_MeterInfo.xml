@@ -50,6 +50,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="meter_type_code" type="integer">
+                <constraints nullable="false" />
+            </column>
+
             <column name="meter_type" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
@@ -83,6 +87,18 @@
             </column>
 
             <column name="control_commands" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="big_endian" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="allow_duplicate" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="calculates" type="integer">
                 <constraints nullable="true" />
             </column>
 

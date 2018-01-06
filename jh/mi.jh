@@ -3,12 +3,16 @@
  * @author youhong
  */
 entity MeterCategoryInfo {
-  /** 设备名称*/
-  meterName String maxlength(64) required,
-  /** 设备类型代码*/
-  meterTypeCode Integer,
-  /** 设备类型*/
-  meterType String maxlength(100)  required,
+  /** 设备分类代码*/
+  meterTypeCode Integer required,
+  /** 设备分类*/
+  meterType String maxlength(64) required,
+  /** 设备大类代码*/
+  dictCode Integer required,
+  /** 设备大类名称*/
+  dictName String maxlength(100)  required,
+  /** 功能码*/
+  functionCode String maxlength(100)  required,
   /** 设备生产厂家*/
   meterFactory String maxlength(100)  required,
   /** 联系方式*/
@@ -28,7 +32,11 @@ entity MeterCategoryInfo {
   /** 修改时间*/
   updateTime Instant required,
   /** 下发命令*/
-  controlCommands String maxlength(100)
+  controlCommands String maxlength(100),
+  /** 长码*/
+  longCode Integer,
+  /** 是否有效*/
+  enable Boolean required
 }
 
 /**
@@ -50,6 +58,8 @@ entity MeterInfo {
   companyCode String maxlength(64),
   /** 串口编码*/
   comPointCode String maxlength(64),
+  /** 设备类型代码*/
+  meterTypeCode Integer required,
   /** 设备类型*/
   meterType String maxlength(50) required,
   /** 起始偏移*/
@@ -67,7 +77,13 @@ entity MeterInfo {
   /** 修改时间*/
   updateTime Instant required,
   /** 下发命令*/
-  controlCommands String maxlength(100)
+  controlCommands String maxlength(100),
+  /** 大Endian*/
+  bigEndian String maxlength(100),
+  /** 允许重复*/
+  allowDuplicate Boolean ,
+  /** 计算*/
+  Calculates Integer
 }
 
  /**

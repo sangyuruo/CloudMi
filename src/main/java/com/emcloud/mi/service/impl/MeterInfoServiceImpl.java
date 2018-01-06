@@ -60,6 +60,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         return meterInfoRepository.save(meterInfo);
     }
 
+
     /**
      *  Get all the meterInfos.
      *
@@ -72,7 +73,6 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         log.debug("Request to get all MeterInfos");
         return meterInfoRepository.findAll(pageable);
     }
-
     /**
      *  Get all the meterInfos.
      *
@@ -85,6 +85,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         log.debug("Request to get all MeterInfo by comPointCode");
         return meterInfoRepository.findAllByComPointCode(comPointCode);
     }
+
 
     /**
      *  Get one meterInfo by id.

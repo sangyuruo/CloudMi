@@ -78,7 +78,7 @@ public class MeterCategoryInfoResource {
         if (meterCategoryInfo.getId() == null) {
             return createMeterCategoryInfo(meterCategoryInfo);
         }
-        MeterCategoryInfo result = meterCategoryInfoService.update(meterCategoryInfo);
+        MeterCategoryInfo result = meterCategoryInfoService.save(meterCategoryInfo);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, meterCategoryInfo.getId().toString()))
             .body(result);
@@ -92,18 +92,20 @@ public class MeterCategoryInfoResource {
      */
     @GetMapping("/meter-category-infos")
     @Timed
-    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfosByMeterName
-    (@RequestParam(value = "query",required = false) String meterName , @ApiParam Pageable pageable) {
+    public ResponseEntity<List<MeterCategoryInfo>> getAllMeterCategoryInfosByMeterType
+    (@RequestParam(value = "query",required = false) String meterType , @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of MeterCategoryInfos");
         Page<MeterCategoryInfo> page;
-        if(StringUtils.isBlank(meterName)){
+        if(StringUtils.isBlank(meterType)){
             page = meterCategoryInfoService.findAll(pageable);
         }else{
-            page = meterCategoryInfoService.findByMeterName(pageable,meterName);
+            page = meterCategoryInfoService.findByMeterType(pageable,meterType);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+
 
     /**
      * GET  /meter-category-infos/:id : get the "id" meterCategoryInfo.

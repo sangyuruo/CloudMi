@@ -64,6 +64,9 @@ public class MeterInfoResourceIntTest {
     private static final String DEFAULT_COM_POINT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_COM_POINT_CODE = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_METER_TYPE_CODE = 1;
+    private static final Integer UPDATED_METER_TYPE_CODE = 2;
+
     private static final String DEFAULT_METER_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_METER_TYPE = "BBBBBBBBBB";
 
@@ -90,6 +93,15 @@ public class MeterInfoResourceIntTest {
 
     private static final String DEFAULT_CONTROL_COMMANDS = "AAAAAAAAAA";
     private static final String UPDATED_CONTROL_COMMANDS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BIG_ENDIAN = "AAAAAAAAAA";
+    private static final String UPDATED_BIG_ENDIAN = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_ALLOW_DUPLICATE = false;
+    private static final Boolean UPDATED_ALLOW_DUPLICATE = true;
+
+    private static final Integer DEFAULT_CALCULATES = 1;
+    private static final Integer UPDATED_CALCULATES = 2;
 
     @Autowired
     private MeterInfoRepository meterInfoRepository;
@@ -139,6 +151,7 @@ public class MeterInfoResourceIntTest {
             .organizationCode(DEFAULT_ORGANIZATION_CODE)
             .companyCode(DEFAULT_COMPANY_CODE)
             .comPointCode(DEFAULT_COM_POINT_CODE)
+            .meterTypeCode(DEFAULT_METER_TYPE_CODE)
             .meterType(DEFAULT_METER_TYPE)
             .startOffset(DEFAULT_START_OFFSET)
             .numberOfRegisters(DEFAULT_NUMBER_OF_REGISTERS)
@@ -147,7 +160,10 @@ public class MeterInfoResourceIntTest {
             .createTime(DEFAULT_CREATE_TIME)
             .updatedBy(DEFAULT_UPDATED_BY)
             .updateTime(DEFAULT_UPDATE_TIME)
-            .controlCommands(DEFAULT_CONTROL_COMMANDS);
+            .controlCommands(DEFAULT_CONTROL_COMMANDS)
+            .bigEndian(DEFAULT_BIG_ENDIAN)
+            .allowDuplicate(DEFAULT_ALLOW_DUPLICATE)
+            .calculates(DEFAULT_CALCULATES);
         return meterInfo;
     }
 
@@ -178,6 +194,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getOrganizationCode()).isEqualTo(DEFAULT_ORGANIZATION_CODE);
         assertThat(testMeterInfo.getCompanyCode()).isEqualTo(DEFAULT_COMPANY_CODE);
         assertThat(testMeterInfo.getComPointCode()).isEqualTo(DEFAULT_COM_POINT_CODE);
+        assertThat(testMeterInfo.getMeterTypeCode()).isEqualTo(DEFAULT_METER_TYPE_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(DEFAULT_METER_TYPE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(DEFAULT_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(DEFAULT_NUMBER_OF_REGISTERS);
@@ -187,6 +204,9 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getUpdatedBy()).isEqualTo(DEFAULT_UPDATED_BY);
         assertThat(testMeterInfo.getUpdateTime()).isEqualTo(DEFAULT_UPDATE_TIME);
         assertThat(testMeterInfo.getControlCommands()).isEqualTo(DEFAULT_CONTROL_COMMANDS);
+        assertThat(testMeterInfo.getBigEndian()).isEqualTo(DEFAULT_BIG_ENDIAN);
+        assertThat(testMeterInfo.isAllowDuplicate()).isEqualTo(DEFAULT_ALLOW_DUPLICATE);
+        assertThat(testMeterInfo.getCalculates()).isEqualTo(DEFAULT_CALCULATES);
     }
 
     @Test
@@ -250,6 +270,24 @@ public class MeterInfoResourceIntTest {
         int databaseSizeBeforeTest = meterInfoRepository.findAll().size();
         // set the field null
         meterInfo.setRegisterCode(null);
+
+        // Create the MeterInfo, which fails.
+
+        restMeterInfoMockMvc.perform(post("/api/meter-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterInfo> meterInfoList = meterInfoRepository.findAll();
+        assertThat(meterInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkMeterTypeCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterInfoRepository.findAll().size();
+        // set the field null
+        meterInfo.setMeterTypeCode(null);
 
         // Create the MeterInfo, which fails.
 
@@ -370,6 +408,7 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].organizationCode").value(hasItem(DEFAULT_ORGANIZATION_CODE.toString())))
             .andExpect(jsonPath("$.[*].companyCode").value(hasItem(DEFAULT_COMPANY_CODE.toString())))
             .andExpect(jsonPath("$.[*].comPointCode").value(hasItem(DEFAULT_COM_POINT_CODE.toString())))
+            .andExpect(jsonPath("$.[*].meterTypeCode").value(hasItem(DEFAULT_METER_TYPE_CODE)))
             .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
             .andExpect(jsonPath("$.[*].startOffset").value(hasItem(DEFAULT_START_OFFSET)))
             .andExpect(jsonPath("$.[*].numberOfRegisters").value(hasItem(DEFAULT_NUMBER_OF_REGISTERS)))
@@ -378,7 +417,10 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].createTime").value(hasItem(DEFAULT_CREATE_TIME.toString())))
             .andExpect(jsonPath("$.[*].updatedBy").value(hasItem(DEFAULT_UPDATED_BY.toString())))
             .andExpect(jsonPath("$.[*].updateTime").value(hasItem(DEFAULT_UPDATE_TIME.toString())))
-            .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())));
+            .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())))
+            .andExpect(jsonPath("$.[*].bigEndian").value(hasItem(DEFAULT_BIG_ENDIAN.toString())))
+            .andExpect(jsonPath("$.[*].allowDuplicate").value(hasItem(DEFAULT_ALLOW_DUPLICATE.booleanValue())))
+            .andExpect(jsonPath("$.[*].calculates").value(hasItem(DEFAULT_CALCULATES)));
     }
 
     @Test
@@ -399,6 +441,7 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.organizationCode").value(DEFAULT_ORGANIZATION_CODE.toString()))
             .andExpect(jsonPath("$.companyCode").value(DEFAULT_COMPANY_CODE.toString()))
             .andExpect(jsonPath("$.comPointCode").value(DEFAULT_COM_POINT_CODE.toString()))
+            .andExpect(jsonPath("$.meterTypeCode").value(DEFAULT_METER_TYPE_CODE))
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
             .andExpect(jsonPath("$.startOffset").value(DEFAULT_START_OFFSET))
             .andExpect(jsonPath("$.numberOfRegisters").value(DEFAULT_NUMBER_OF_REGISTERS))
@@ -407,7 +450,10 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.createTime").value(DEFAULT_CREATE_TIME.toString()))
             .andExpect(jsonPath("$.updatedBy").value(DEFAULT_UPDATED_BY.toString()))
             .andExpect(jsonPath("$.updateTime").value(DEFAULT_UPDATE_TIME.toString()))
-            .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()));
+            .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()))
+            .andExpect(jsonPath("$.bigEndian").value(DEFAULT_BIG_ENDIAN.toString()))
+            .andExpect(jsonPath("$.allowDuplicate").value(DEFAULT_ALLOW_DUPLICATE.booleanValue()))
+            .andExpect(jsonPath("$.calculates").value(DEFAULT_CALCULATES));
     }
 
     @Test
@@ -436,6 +482,7 @@ public class MeterInfoResourceIntTest {
             .organizationCode(UPDATED_ORGANIZATION_CODE)
             .companyCode(UPDATED_COMPANY_CODE)
             .comPointCode(UPDATED_COM_POINT_CODE)
+            .meterTypeCode(UPDATED_METER_TYPE_CODE)
             .meterType(UPDATED_METER_TYPE)
             .startOffset(UPDATED_START_OFFSET)
             .numberOfRegisters(UPDATED_NUMBER_OF_REGISTERS)
@@ -444,7 +491,10 @@ public class MeterInfoResourceIntTest {
             .createTime(UPDATED_CREATE_TIME)
             .updatedBy(UPDATED_UPDATED_BY)
             .updateTime(UPDATED_UPDATE_TIME)
-            .controlCommands(UPDATED_CONTROL_COMMANDS);
+            .controlCommands(UPDATED_CONTROL_COMMANDS)
+            .bigEndian(UPDATED_BIG_ENDIAN)
+            .allowDuplicate(UPDATED_ALLOW_DUPLICATE)
+            .calculates(UPDATED_CALCULATES);
 
         restMeterInfoMockMvc.perform(put("/api/meter-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -462,6 +512,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getOrganizationCode()).isEqualTo(UPDATED_ORGANIZATION_CODE);
         assertThat(testMeterInfo.getCompanyCode()).isEqualTo(UPDATED_COMPANY_CODE);
         assertThat(testMeterInfo.getComPointCode()).isEqualTo(UPDATED_COM_POINT_CODE);
+        assertThat(testMeterInfo.getMeterTypeCode()).isEqualTo(UPDATED_METER_TYPE_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(UPDATED_METER_TYPE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(UPDATED_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(UPDATED_NUMBER_OF_REGISTERS);
@@ -471,6 +522,9 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getUpdatedBy()).isEqualTo(UPDATED_UPDATED_BY);
         assertThat(testMeterInfo.getUpdateTime()).isEqualTo(UPDATED_UPDATE_TIME);
         assertThat(testMeterInfo.getControlCommands()).isEqualTo(UPDATED_CONTROL_COMMANDS);
+        assertThat(testMeterInfo.getBigEndian()).isEqualTo(UPDATED_BIG_ENDIAN);
+        assertThat(testMeterInfo.isAllowDuplicate()).isEqualTo(UPDATED_ALLOW_DUPLICATE);
+        assertThat(testMeterInfo.getCalculates()).isEqualTo(UPDATED_CALCULATES);
     }
 
     @Test

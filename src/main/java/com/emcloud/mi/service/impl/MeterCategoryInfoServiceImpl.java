@@ -59,6 +59,7 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
         return meterCategoryInfoRepository.save(meterCategoryInfo);
     }
 
+
     /**
      *  Get all the meterCategoryInfos.
      *
@@ -73,17 +74,18 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
     }
 
     /**
-     *  Get all the MeterCategoryInfo by meterName .
+     *  Get all the MeterCategoryInfo by meterType .
      *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<MeterCategoryInfo> findByMeterName(Pageable pageable,String meterName) {
-        log.debug("Request to get all MeterCategoryInfo by meterName");
-        return meterCategoryInfoRepository.findAllByMeterNameContaining(pageable,meterName);
+    public Page<MeterCategoryInfo> findByMeterType(Pageable pageable,String meterType) {
+        log.debug("Request to get all MeterCategoryInfo by meterType");
+        return meterCategoryInfoRepository.findAllByMeterTypeContaining(pageable,meterType);
     }
+
 
     /**
      *  Get one meterCategoryInfo by id.

@@ -80,7 +80,7 @@ class MeterInfoGatlingTest extends Simulation {
             .exec(http("Create new meterInfo")
             .post("/emcloudmi/api/meter-infos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "meterName":"SAMPLE_TEXT", "registerCode":"0", "addressCode":"SAMPLE_TEXT", "organizationCode":"SAMPLE_TEXT", "companyCode":"SAMPLE_TEXT", "comPointCode":"SAMPLE_TEXT", "meterType":"SAMPLE_TEXT", "startOffset":"0", "numberOfRegisters":"0", "controlAddress":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "meterCode":"SAMPLE_TEXT", "meterName":"SAMPLE_TEXT", "registerCode":"0", "addressCode":"SAMPLE_TEXT", "organizationCode":"SAMPLE_TEXT", "companyCode":"SAMPLE_TEXT", "comPointCode":"SAMPLE_TEXT", "meterTypeCode":"0", "meterType":"SAMPLE_TEXT", "startOffset":"0", "numberOfRegisters":"0", "controlAddress":"0", "createdBy":"SAMPLE_TEXT", "createTime":"2020-01-01T00:00:00.000Z", "updatedBy":"SAMPLE_TEXT", "updateTime":"2020-01-01T00:00:00.000Z", "controlCommands":"SAMPLE_TEXT", "bigEndian":"SAMPLE_TEXT", "allowDuplicate":null, "calculates":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_meterInfo_url"))).exitHereIfFailed
             .pause(10)
