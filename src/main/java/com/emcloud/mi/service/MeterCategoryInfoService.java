@@ -4,6 +4,8 @@ import com.emcloud.mi.domain.MeterCategoryInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing MeterCategoryInfo.
  */
@@ -39,8 +41,15 @@ public interface MeterCategoryInfoService {
      *  @param meterType the id of the entity
      *  @return the entity
      */
-    Page<MeterCategoryInfo> findByMeterType(Pageable pageable,String meterType);
+    Page<MeterCategoryInfo> findAllByMeterType(Pageable pageable,String meterType);
 
+    /**
+     *  Get the "meterType" meterCategoryInfo.
+     *
+     *  @param meterType the id of the entity
+     *  @return the entity
+     */
+    List<MeterCategoryInfo> findByMeterType(String meterType);
     /**
      *  Get the "id" meterCategoryInfo.
      *

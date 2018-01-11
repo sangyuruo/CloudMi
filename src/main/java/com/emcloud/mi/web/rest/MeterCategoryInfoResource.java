@@ -2,6 +2,7 @@ package com.emcloud.mi.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.emcloud.mi.domain.MeterCategoryInfo;
+import com.emcloud.mi.domain.MeterInfo;
 import com.emcloud.mi.service.MeterCategoryInfoService;
 import com.emcloud.mi.web.rest.errors.BadRequestAlertException;
 import com.emcloud.mi.web.rest.util.HeaderUtil;
@@ -99,12 +100,25 @@ public class MeterCategoryInfoResource {
         if(StringUtils.isBlank(meterType)){
             page = meterCategoryInfoService.findAll(pageable);
         }else{
-            page = meterCategoryInfoService.findByMeterType(pageable,meterType);
+            page = meterCategoryInfoService.findAllByMeterType(pageable,meterType);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-category-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /meter-category-infos : get all the meterCategoryInfos.
+     *
+     * @param meterType the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of meterCategoryInfos in body
+     */
+    @GetMapping("/meter-category-infos/by-meter-type")
+    public List<MeterCategoryInfo> getAllByMeterType
+    (@RequestParam(value = "meterType") String meterType ) {
+        log.debug("REST meterType to get a page of MeterCategoryInfo");
+        List<MeterCategoryInfo> list = meterCategoryInfoService.findByMeterType(meterType);
+        return list;
+    }
 
 
     /**

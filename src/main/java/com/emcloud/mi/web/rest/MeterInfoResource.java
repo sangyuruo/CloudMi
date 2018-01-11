@@ -113,20 +113,6 @@ public class MeterInfoResource {
         return list;
     }
 
-    /**
-     * GET  /meter-infos : get all the meterInfos.
-     *
-     * @param meterType the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
-     */
-    @GetMapping("/meter-infos/by-meter-type")
-    @Timed
-    public List<MeterInfo> getAllByMeterType
-        (@RequestParam(value = "meterType") String meterType ) {
-        log.debug("REST meterType to get a page of MeterInfo");
-        List<MeterInfo> list = meterInfoService.findAllByMeterType(meterType);
-        return list;
-    }
 
     /**
      * GET  /meter-infos/:id : get the "id" meterInfo.

@@ -44,13 +44,7 @@ public interface MeterInfoService {
      */
     List<MeterInfo> findAllByComPointCode(String comPointCode);
 
-    /**
-     *  Get all the meterInfos.
-     *
-     *  @param meterType the pagination information
-     *  @return the list of entities
-     */
-    List<MeterInfo> findAllByMeterType(String meterType);
+
 
     /**
      *  Get the "id" meterInfo.

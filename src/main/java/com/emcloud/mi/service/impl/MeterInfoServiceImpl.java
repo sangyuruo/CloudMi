@@ -86,18 +86,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         return meterInfoRepository.findAllByComPointCode(comPointCode);
     }
 
-    /**
-     *  Get all the meterInfos.
-     *
-     *  @param meterType the pagination information
-     *  @return the list of entities
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public List<MeterInfo> findAllByMeterType(String meterType){
-        log.debug("Request to get all MeterInfo by meterType");
-        return meterInfoRepository.findAllByComPointCode(meterType);
-    }
+
 
     /**
      *  Get one meterInfo by id.

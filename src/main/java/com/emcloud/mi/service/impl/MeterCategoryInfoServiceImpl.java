@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 
 /**
@@ -81,11 +82,24 @@ public class MeterCategoryInfoServiceImpl implements MeterCategoryInfoService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<MeterCategoryInfo> findByMeterType(Pageable pageable,String meterType) {
+    public Page<MeterCategoryInfo> findAllByMeterType(Pageable pageable,String meterType) {
         log.debug("Request to get all MeterCategoryInfo by meterType");
         return meterCategoryInfoRepository.findAllByMeterTypeContaining(pageable,meterType);
     }
 
+
+    /**
+     *  Get all the MeterCategoryInfo by meterType .
+     *
+     *  @param meterType the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<MeterCategoryInfo> findByMeterType(String meterType){
+        log.debug("Request to get all MeterCategoryInfo by meterType");
+        return meterCategoryInfoRepository.findByMeterType(meterType);
+    }
 
     /**
      *  Get one meterCategoryInfo by id.

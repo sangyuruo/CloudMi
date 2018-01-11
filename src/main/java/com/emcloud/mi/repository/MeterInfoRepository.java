@@ -15,5 +15,5 @@ import java.util.List;
 @Repository
 public interface MeterInfoRepository extends JpaRepository<MeterInfo, Long> {
     List<MeterInfo> findAllByComPointCode(String comPointCode);
-    List<MeterInfo> findByMeterType(String meterType);
+
 }
