@@ -18,11 +18,11 @@ entity MeterCategoryInfo {
   /** 联系方式*/
   tel Integer,
   /**起始偏移*/
-  startOffset Integer,
+  startOffset Integer required,
   /** 寄存器数量*/
-  numberOfRegisters Integer,
+  numberOfRegisters Integer required,
   /** 控制区*/
-  controlAddress Integer,
+  controlAddress Integer required,
   /** 创建人*/
   createdBy String maxlength(20) required,
   /** 创建时间*/
@@ -63,11 +63,11 @@ entity MeterInfo {
   /** 设备类型*/
   meterType String maxlength(50) required,
   /** 起始偏移*/
-  startOffset Integer,
+  startOffset Integer required,
   /** 寄存器数量*/
-  numberOfRegisters Integer,
+  numberOfRegisters Integer required,
   /** 控制地址*/
-  controlAddress Integer,
+  controlAddress Integer required,
   /** 创建人*/
   createdBy String maxlength(20) required,
   /** 创建时间*/
@@ -146,4 +146,3 @@ relationship OneToMany {
 relationship ManyToOne {
   MeterInfo {MeterCategoryInfo  } to MeterCategoryInfo
 }
-

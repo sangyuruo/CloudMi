@@ -67,16 +67,25 @@
             "fieldName": "startOffset",
             "javadoc": "起始偏移",
             "fieldType": "Integer"
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "numberOfRegisters",
             "javadoc": "寄存器数量",
             "fieldType": "Integer"
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "controlAddress",
             "javadoc": "控制区",
             "fieldType": "Integer"
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "createdBy",
