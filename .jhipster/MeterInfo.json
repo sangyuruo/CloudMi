@@ -98,6 +98,16 @@
             "fieldValidateRulesMaxlength": 50
         },
         {
+            "fieldName": "longitude",
+            "javadoc": "经度",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "latitude",
+            "javadoc": "纬度",
+            "fieldType": "Double"
+        },
+        {
             "fieldName": "startOffset",
             "javadoc": "起始偏移",
             "fieldType": "Integer",
@@ -184,6 +194,14 @@
             "fieldName": "calculates",
             "javadoc": "计算",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "enable",
+            "javadoc": "是否有效",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171205062025",
