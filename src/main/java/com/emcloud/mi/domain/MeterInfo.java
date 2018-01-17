@@ -106,6 +106,20 @@ public class MeterInfo implements Serializable {
     private String meterType;
 
     /**
+     * 经度
+     */
+    @ApiModelProperty(value = "经度")
+    @Column(name = "longitude")
+    private Double longitude;
+
+    /**
+     * 纬度
+     */
+    @ApiModelProperty(value = "纬度")
+    @Column(name = "latitude")
+    private Double latitude;
+
+    /**
      * 起始偏移
      */
     @NotNull
@@ -188,6 +202,14 @@ public class MeterInfo implements Serializable {
     @ApiModelProperty(value = "计算")
     @Column(name = "calculates")
     private Integer calculates;
+
+    /**
+     * 是否有效
+     */
+    @NotNull
+    @ApiModelProperty(value = "是否有效", required = true)
+    @Column(name = "enable", nullable = false)
+    private Boolean enable;
 
     @OneToMany(mappedBy = "meterInfo")
     @JsonIgnore
@@ -321,6 +343,41 @@ public class MeterInfo implements Serializable {
 
     public void setMeterType(String meterType) {
         this.meterType = meterType;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public MeterInfo longitude(Double longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+    public MeterInfo latitude(Double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+    public MeterInfo enable(Boolean enable) {
+        this.enable = enable;
+        return this;
+    }
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
     public Integer getStartOffset() {

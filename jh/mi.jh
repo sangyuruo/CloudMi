@@ -62,6 +62,10 @@ entity MeterInfo {
   meterTypeCode Integer required,
   /** 设备类型*/
   meterType String maxlength(50) required,
+  /** 经度*/
+  longitude Double,
+  /** 纬度*/
+  latitude Double,
   /** 起始偏移*/
   startOffset Integer required,
   /** 寄存器数量*/
@@ -82,8 +86,10 @@ entity MeterInfo {
   bigEndian String maxlength(100),
   /** 允许重复*/
   allowDuplicate Boolean ,
-  /** 计算*/Integer
-  Calculates
+  /** 计算*/
+  Calculates Integer,
+  /** 是否有效*/
+  enable Boolean required
 }
 
  /**
