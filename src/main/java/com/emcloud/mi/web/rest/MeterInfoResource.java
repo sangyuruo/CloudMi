@@ -6,8 +6,8 @@ import com.emcloud.mi.service.MeterInfoService;
 import com.emcloud.mi.web.rest.errors.BadRequestAlertException;
 import com.emcloud.mi.web.rest.util.HeaderUtil;
 import com.emcloud.mi.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -101,13 +100,28 @@ public class MeterInfoResource {
     /**
      * GET  /meter-infos : get all the meterInfos.
      *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
+     */
+    @GetMapping("/meter-infos/byou/{companyCode}/{orgCode}")
+    @Timed
+    public ResponseEntity<List<MeterInfo>> getAllMeterInfosByCompanyCodeAndOrgCode(@PathVariable String companyCode, @PathVariable String orgCode, @ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of MeterInfos by ou");
+        Page<MeterInfo> page = meterInfoService.findAllByCompanyCodeAndOrganizationCode(companyCode, orgCode, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-infos/byou/" + companyCode + "/" + orgCode );
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /meter-infos : get all the meterInfos.
+     *
      * @param comPointCode the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
      */
     @GetMapping("/meter-infos/by-com-point-code")
     @Timed
     public List<MeterInfo> getAllMeterInfosByComPointCode
-    (@RequestParam(value = "comPointCode",required = false) String comPointCode ) {
+    (@RequestParam(value = "comPointCode", required = false) String comPointCode) {
         log.debug("REST comPointCode to get a page of MeterInfo");
         List<MeterInfo> list = meterInfoService.findAllByComPointCode(comPointCode);
         return list;

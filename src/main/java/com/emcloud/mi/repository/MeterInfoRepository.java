@@ -1,6 +1,8 @@
 package com.emcloud.mi.repository;
 
 import com.emcloud.mi.domain.MeterInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -15,5 +17,7 @@ import java.util.List;
 @Repository
 public interface MeterInfoRepository extends JpaRepository<MeterInfo, Long> {
     List<MeterInfo> findAllByComPointCode(String comPointCode);
+
+    Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String organizationCode,Pageable pageable);
 
 }

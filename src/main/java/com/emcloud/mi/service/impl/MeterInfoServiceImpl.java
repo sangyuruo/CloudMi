@@ -73,6 +73,12 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         log.debug("Request to get all MeterInfos");
         return meterInfoRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String orgCode, Pageable pageable) {
+        return meterInfoRepository.findAllByCompanyCodeAndOrganizationCode(companyCode,orgCode,pageable);
+    }
+
     /**
      *  Get all the meterInfos.
      *

@@ -35,6 +35,14 @@ public interface MeterInfoService {
      */
     Page<MeterInfo> findAll(Pageable pageable);
 
+    /**
+     *  Get all the meterInfos.
+     *
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String orgCode , Pageable pageable);
+
 
     /**
      *  Get all the meterInfos.
