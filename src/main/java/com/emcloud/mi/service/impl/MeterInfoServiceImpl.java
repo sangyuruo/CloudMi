@@ -76,7 +76,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
 
     @Override
     public Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String orgCode, Pageable pageable) {
-        return meterInfoRepository.findAllByCompanyCodeAndOrganizationCode(companyCode,orgCode,pageable);
+        return meterInfoRepository.findAllByCompanyCodeAndOrganizationCodeStartingWith(companyCode,orgCode,pageable);
     }
 
     /**
