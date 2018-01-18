@@ -127,6 +127,35 @@ public class MeterInfoResource {
         return list;
     }
 
+    /**
+     * GET  /meter-infos : get all the meterInfos.
+     *
+     * @param meterCode the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
+     */
+    @GetMapping("/meter-infos/by-meter-code")
+    @Timed
+    public ResponseEntity<MeterInfo> getMeterInfoByMeterCode
+        (@RequestParam(value = "meterCode") String meterCode){
+        log.debug("Request to get MeterInfo : {}", meterCode);
+        MeterInfo meterInfo = meterInfoService.findOneByMeterCode(meterCode);
+        return  ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
+    }
+
+    /**
+     * GET  /meter-infos : get all the meterInfos.
+     *
+     * @param meterCode the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
+     *//*
+    @GetMapping("/meter-infos/by-meter-code")
+    @Timed
+    public ResponseEntity<MeterInfo> getOneMeterInfo
+    (@RequestParam(value = "meterCode") String meterCode, String comPointCode, Integer registerCode){
+        log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
+        MeterInfo meterInfo =meterInfoService.findOneMeterInfo(meterCode,comPointCode,registerCode);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterCode,comPointCode,registerCode));
+    }*/
 
     /**
      * GET  /meter-infos/:id : get the "id" meterInfo.

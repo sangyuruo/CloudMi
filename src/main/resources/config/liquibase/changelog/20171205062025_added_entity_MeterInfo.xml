@@ -57,7 +57,12 @@
             <column name="meter_type" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-
+            <column name="longitude" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="latitude" type="double">
+                <constraints nullable="true" />
+            </column>
             <column name="start_offset" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -99,6 +104,10 @@
             </column>
 
             <column name="calculates" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enable" type="bit">
                 <constraints nullable="true" />
             </column>
 

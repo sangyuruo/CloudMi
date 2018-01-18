@@ -67,6 +67,12 @@ public class MeterInfoResourceIntTest {
     private static final Integer DEFAULT_METER_TYPE_CODE = 1;
     private static final Integer UPDATED_METER_TYPE_CODE = 2;
 
+    private static final Double DEFAULT_LATITUDE = 1.;
+    private static final Double UPDATED_LATITUDE = 2.;
+
+    private static final Double DEFAULT_LONGITUDE = 1.;
+    private static final Double UPDATED_LONGITUDE = 2.;
+
     private static final String DEFAULT_METER_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_METER_TYPE = "BBBBBBBBBB";
 
@@ -102,6 +108,9 @@ public class MeterInfoResourceIntTest {
 
     private static final Integer DEFAULT_CALCULATES = 1;
     private static final Integer UPDATED_CALCULATES = 2;
+
+    private static final Boolean DEFAULT_ENABLE = false;
+    private static final Boolean UPDATED_ENABLE = true;
 
     @Autowired
     private MeterInfoRepository meterInfoRepository;
@@ -153,6 +162,8 @@ public class MeterInfoResourceIntTest {
             .comPointCode(DEFAULT_COM_POINT_CODE)
             .meterTypeCode(DEFAULT_METER_TYPE_CODE)
             .meterType(DEFAULT_METER_TYPE)
+            .longitude(DEFAULT_LATITUDE)
+            .longitude(DEFAULT_LONGITUDE)
             .startOffset(DEFAULT_START_OFFSET)
             .numberOfRegisters(DEFAULT_NUMBER_OF_REGISTERS)
             .controlAddress(DEFAULT_CONTROL_ADDRESS)
@@ -163,7 +174,8 @@ public class MeterInfoResourceIntTest {
             .controlCommands(DEFAULT_CONTROL_COMMANDS)
             .bigEndian(DEFAULT_BIG_ENDIAN)
             .allowDuplicate(DEFAULT_ALLOW_DUPLICATE)
-            .calculates(DEFAULT_CALCULATES);
+            .calculates(DEFAULT_CALCULATES)
+            .enable(DEFAULT_ENABLE);
         return meterInfo;
     }
 
@@ -196,6 +208,8 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getComPointCode()).isEqualTo(DEFAULT_COM_POINT_CODE);
         assertThat(testMeterInfo.getMeterTypeCode()).isEqualTo(DEFAULT_METER_TYPE_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(DEFAULT_METER_TYPE);
+        assertThat(testMeterInfo.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testMeterInfo.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(DEFAULT_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(DEFAULT_NUMBER_OF_REGISTERS);
         assertThat(testMeterInfo.getControlAddress()).isEqualTo(DEFAULT_CONTROL_ADDRESS);
@@ -207,6 +221,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getBigEndian()).isEqualTo(DEFAULT_BIG_ENDIAN);
         assertThat(testMeterInfo.isAllowDuplicate()).isEqualTo(DEFAULT_ALLOW_DUPLICATE);
         assertThat(testMeterInfo.getCalculates()).isEqualTo(DEFAULT_CALCULATES);
+        assertThat(testMeterInfo.getEnable()).isEqualTo(DEFAULT_ENABLE);
     }
 
     @Test
@@ -410,6 +425,8 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].comPointCode").value(hasItem(DEFAULT_COM_POINT_CODE.toString())))
             .andExpect(jsonPath("$.[*].meterTypeCode").value(hasItem(DEFAULT_METER_TYPE_CODE)))
             .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
             .andExpect(jsonPath("$.[*].startOffset").value(hasItem(DEFAULT_START_OFFSET)))
             .andExpect(jsonPath("$.[*].numberOfRegisters").value(hasItem(DEFAULT_NUMBER_OF_REGISTERS)))
             .andExpect(jsonPath("$.[*].controlAddress").value(hasItem(DEFAULT_CONTROL_ADDRESS)))
@@ -420,7 +437,8 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].controlCommands").value(hasItem(DEFAULT_CONTROL_COMMANDS.toString())))
             .andExpect(jsonPath("$.[*].bigEndian").value(hasItem(DEFAULT_BIG_ENDIAN.toString())))
             .andExpect(jsonPath("$.[*].allowDuplicate").value(hasItem(DEFAULT_ALLOW_DUPLICATE.booleanValue())))
-            .andExpect(jsonPath("$.[*].calculates").value(hasItem(DEFAULT_CALCULATES)));
+            .andExpect(jsonPath("$.[*].calculates").value(hasItem(DEFAULT_CALCULATES)))
+            .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())));
     }
 
     @Test
@@ -443,6 +461,8 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.comPointCode").value(DEFAULT_COM_POINT_CODE.toString()))
             .andExpect(jsonPath("$.meterTypeCode").value(DEFAULT_METER_TYPE_CODE))
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
             .andExpect(jsonPath("$.startOffset").value(DEFAULT_START_OFFSET))
             .andExpect(jsonPath("$.numberOfRegisters").value(DEFAULT_NUMBER_OF_REGISTERS))
             .andExpect(jsonPath("$.controlAddress").value(DEFAULT_CONTROL_ADDRESS))
@@ -453,7 +473,8 @@ public class MeterInfoResourceIntTest {
             .andExpect(jsonPath("$.controlCommands").value(DEFAULT_CONTROL_COMMANDS.toString()))
             .andExpect(jsonPath("$.bigEndian").value(DEFAULT_BIG_ENDIAN.toString()))
             .andExpect(jsonPath("$.allowDuplicate").value(DEFAULT_ALLOW_DUPLICATE.booleanValue()))
-            .andExpect(jsonPath("$.calculates").value(DEFAULT_CALCULATES));
+            .andExpect(jsonPath("$.calculates").value(DEFAULT_CALCULATES))
+            .andExpect(jsonPath("$.enable").value(DEFAULT_ENABLE.booleanValue()));
     }
 
     @Test
@@ -484,6 +505,8 @@ public class MeterInfoResourceIntTest {
             .comPointCode(UPDATED_COM_POINT_CODE)
             .meterTypeCode(UPDATED_METER_TYPE_CODE)
             .meterType(UPDATED_METER_TYPE)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE)
             .startOffset(UPDATED_START_OFFSET)
             .numberOfRegisters(UPDATED_NUMBER_OF_REGISTERS)
             .controlAddress(UPDATED_CONTROL_ADDRESS)
@@ -494,7 +517,8 @@ public class MeterInfoResourceIntTest {
             .controlCommands(UPDATED_CONTROL_COMMANDS)
             .bigEndian(UPDATED_BIG_ENDIAN)
             .allowDuplicate(UPDATED_ALLOW_DUPLICATE)
-            .calculates(UPDATED_CALCULATES);
+            .calculates(UPDATED_CALCULATES)
+            .enable(UPDATED_ENABLE);
 
         restMeterInfoMockMvc.perform(put("/api/meter-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -514,6 +538,8 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getComPointCode()).isEqualTo(UPDATED_COM_POINT_CODE);
         assertThat(testMeterInfo.getMeterTypeCode()).isEqualTo(UPDATED_METER_TYPE_CODE);
         assertThat(testMeterInfo.getMeterType()).isEqualTo(UPDATED_METER_TYPE);
+        assertThat(testMeterInfo.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testMeterInfo.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testMeterInfo.getStartOffset()).isEqualTo(UPDATED_START_OFFSET);
         assertThat(testMeterInfo.getNumberOfRegisters()).isEqualTo(UPDATED_NUMBER_OF_REGISTERS);
         assertThat(testMeterInfo.getControlAddress()).isEqualTo(UPDATED_CONTROL_ADDRESS);
@@ -525,6 +551,7 @@ public class MeterInfoResourceIntTest {
         assertThat(testMeterInfo.getBigEndian()).isEqualTo(UPDATED_BIG_ENDIAN);
         assertThat(testMeterInfo.isAllowDuplicate()).isEqualTo(UPDATED_ALLOW_DUPLICATE);
         assertThat(testMeterInfo.getCalculates()).isEqualTo(UPDATED_CALCULATES);
+        assertThat(testMeterInfo.getEnable()).isEqualTo(UPDATED_ENABLE);
     }
 
     @Test

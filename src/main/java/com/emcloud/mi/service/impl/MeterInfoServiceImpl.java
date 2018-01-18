@@ -92,7 +92,27 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         return meterInfoRepository.findAllByComPointCode(comPointCode);
     }
 
+    /**
+     *  Get one meterInfo by id.
+     *
+     *  @param meterCode the id of the entity
+     *  @return the entity
+     */
+    public MeterInfo findOneByMeterCode(String meterCode){
+        log.debug("Request to get MeterInfo : {}", meterCode);
+        return meterInfoRepository.findOneByMeterCode(meterCode);
+    }
 
+  /*  *//**
+     *  Get one meterInfo by id.
+     *
+     *  @param meterCode,comPointCode,registerCode the id of the entity
+     *  @return the entity
+     *//*
+    public MeterInfo findOneMeterInfo(String meterCode, String comPointCode, Integer registerCode){
+        log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
+        return meterInfoRepository.findOneMeterInfo(meterCode,comPointCode,registerCode);
+    }*/
 
     /**
      *  Get one meterInfo by id.

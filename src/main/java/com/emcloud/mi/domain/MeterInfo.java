@@ -595,6 +595,8 @@ public class MeterInfo implements Serializable {
             ", comPointCode='" + getComPointCode() + "'" +
             ", meterTypeCode='" + getMeterTypeCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
+            ", longitude='" + getLongitude() + "'" +
+            ", latitude='" + getLatitude() + "'" +
             ", startOffset='" + getStartOffset() + "'" +
             ", numberOfRegisters='" + getNumberOfRegisters() + "'" +
             ", controlAddress='" + getControlAddress() + "'" +
@@ -606,6 +608,7 @@ public class MeterInfo implements Serializable {
             ", bigEndian='" + getBigEndian() + "'" +
             ", allowDuplicate='" + isAllowDuplicate() + "'" +
             ", calculates='" + getCalculates() + "'" +
+            ", enable='" + getEnable() + "'" +
             "}";
     }
 }
