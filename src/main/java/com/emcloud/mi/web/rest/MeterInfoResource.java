@@ -6,8 +6,10 @@ import com.emcloud.mi.service.MeterInfoService;
 import com.emcloud.mi.web.rest.errors.BadRequestAlertException;
 import com.emcloud.mi.web.rest.util.HeaderUtil;
 import com.emcloud.mi.web.rest.util.PaginationUtil;
+import com.hazelcast.util.StringUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -138,7 +140,7 @@ public class MeterInfoResource {
     public ResponseEntity<MeterInfo> getMeterInfoByMeterCode
         (@RequestParam(value = "meterCode") String meterCode){
         log.debug("Request to get MeterInfo : {}", meterCode);
-        MeterInfo meterInfo = meterInfoService.findOneByMeterCode(meterCode);
+        MeterInfo meterInfo = meterInfoService.findByMeterCode(meterCode);
         return  ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
     }
 
@@ -147,15 +149,15 @@ public class MeterInfoResource {
      *
      * @param meterCode the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
-     *//*
-    @GetMapping("/meter-infos/by-meter-code")
+     */
+    @GetMapping("/meter-infos/{meterCode}/{comPointCode}/{registerCode}")
     @Timed
     public ResponseEntity<MeterInfo> getOneMeterInfo
-    (@RequestParam(value = "meterCode") String meterCode, String comPointCode, Integer registerCode){
+    (@RequestParam(value = "meterInfo") @PathVariable String meterCode,@PathVariable String comPointCode,@PathVariable Integer registerCode){
         log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
-        MeterInfo meterInfo =meterInfoService.findOneMeterInfo(meterCode,comPointCode,registerCode);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterCode,comPointCode,registerCode));
-    }*/
+        MeterInfo meterInfo =meterInfoService.findByMeterCodeAndComPointCodeAndRegisterCode(meterCode,comPointCode,registerCode);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
+    }
 
     /**
      * GET  /meter-infos/:id : get the "id" meterInfo.

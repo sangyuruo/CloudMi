@@ -66,6 +66,8 @@ entity MeterInfo {
   longitude Double,
   /** 纬度*/
   latitude Double,
+  /** 长码*/
+  longCode Long，
   /** 起始偏移*/
   startOffset Integer required,
   /** 寄存器数量*/

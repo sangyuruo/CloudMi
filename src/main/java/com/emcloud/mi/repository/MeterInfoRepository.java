@@ -18,7 +18,14 @@ import java.util.List;
 public interface MeterInfoRepository extends JpaRepository<MeterInfo, Long> {
     List<MeterInfo> findAllByComPointCode(String comPointCode);
 
+
     Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String organizationCode,Pageable pageable);
-    MeterInfo findOneByMeterCode(String meterCode);
-//    MeterInfo findOneMeterInfo(String meterCode, String comPointCode, Integer registerCode);
+    MeterInfo findByMeterCode(String meterCode);
+
+    /*MeterInfo findOneMeterInfo(String meterCode, String comPointCode, Integer registerCode);*/
+    MeterInfo findByMeterCodeAndComPointCodeAndRegisterCode(String meterCode, String comPointCode, Integer registerCode);
+
+    Page<MeterInfo> findAllByCompanyCodeAndOrganizationCodeStartingWith(String companyCode, String organizationCode,Pageable pageable);
+
+
 }

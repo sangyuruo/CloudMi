@@ -103,6 +103,11 @@
             "fieldType": "Double"
         },
         {
+            "fieldName": "longCode",
+            "javadoc": "长码",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "latitude",
             "javadoc": "纬度",
             "fieldType": "Double"

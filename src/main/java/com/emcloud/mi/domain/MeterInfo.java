@@ -120,6 +120,13 @@ public class MeterInfo implements Serializable {
     private Double latitude;
 
     /**
+     * 长码
+     */
+    @ApiModelProperty(value = "纬度")
+    @Column(name = "long_code")
+    private Long longCode;
+
+    /**
      * 起始偏移
      */
     @NotNull
@@ -369,6 +376,18 @@ public class MeterInfo implements Serializable {
         this.latitude = latitude;
     }
 
+
+    public Long getLongCode() {
+        return longCode;
+    }
+    public MeterInfo longCode(Long longCode) {
+        this.longCode = longCode;
+        return this;
+    }
+    public void setLongCode(Long longCode) {
+        this.longCode = longCode;
+    }
+
     public Boolean getEnable() {
         return enable;
     }
@@ -597,6 +616,7 @@ public class MeterInfo implements Serializable {
             ", meterType='" + getMeterType() + "'" +
             ", longitude='" + getLongitude() + "'" +
             ", latitude='" + getLatitude() + "'" +
+            ", longCode='" + getLongCode() + "'" +
             ", startOffset='" + getStartOffset() + "'" +
             ", numberOfRegisters='" + getNumberOfRegisters() + "'" +
             ", controlAddress='" + getControlAddress() + "'" +

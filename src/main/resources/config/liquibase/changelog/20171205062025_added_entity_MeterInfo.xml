@@ -63,6 +63,9 @@
             <column name="latitude" type="double">
                 <constraints nullable="true" />
             </column>
+            <column name="long_code" type="long">
+                <constraints nullable="true" />
+            </column>
             <column name="start_offset" type="integer">
                 <constraints nullable="true" />
             </column>

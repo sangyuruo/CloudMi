@@ -76,7 +76,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
 
     @Override
     public Page<MeterInfo> findAllByCompanyCodeAndOrganizationCode(String companyCode, String orgCode, Pageable pageable) {
-        return meterInfoRepository.findAllByCompanyCodeAndOrganizationCode(companyCode,orgCode,pageable);
+        return meterInfoRepository.findAllByCompanyCodeAndOrganizationCodeStartingWith(companyCode,orgCode,pageable);
     }
 
     /**
@@ -98,21 +98,21 @@ public class MeterInfoServiceImpl implements MeterInfoService{
      *  @param meterCode the id of the entity
      *  @return the entity
      */
-    public MeterInfo findOneByMeterCode(String meterCode){
+    public MeterInfo findByMeterCode(String meterCode){
         log.debug("Request to get MeterInfo : {}", meterCode);
-        return meterInfoRepository.findOneByMeterCode(meterCode);
+        return meterInfoRepository.findByMeterCode(meterCode);
     }
 
-  /*  *//**
+  /**
      *  Get one meterInfo by id.
      *
      *  @param meterCode,comPointCode,registerCode the id of the entity
      *  @return the entity
-     *//*
-    public MeterInfo findOneMeterInfo(String meterCode, String comPointCode, Integer registerCode){
+     */
+    public MeterInfo findByMeterCodeAndComPointCodeAndRegisterCode(String meterCode, String comPointCode, Integer registerCode){
         log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
-        return meterInfoRepository.findOneMeterInfo(meterCode,comPointCode,registerCode);
-    }*/
+        return meterInfoRepository.findByMeterCodeAndComPointCodeAndRegisterCode(meterCode,comPointCode,registerCode);
+    }
 
     /**
      *  Get one meterInfo by id.
