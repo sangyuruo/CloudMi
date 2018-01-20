@@ -107,7 +107,7 @@ public class MeterInfoResource {
      */
     @GetMapping("/meter-infos/byou/{companyCode}/{orgCode}")
     @Timed
-    public ResponseEntity<List<MeterInfo>> getAllMeterInfosByCompanyCodeAndOrgCode(@PathVariable String companyCode, @PathVariable String orgCode, @ApiParam Pageable pageable) {
+    public ResponseEntity<List<MeterInfo>> getAllMeterInfosByCompanyCodeAndOrgCode(@PathVariable(value = "companyCode") String companyCode, @PathVariable(value = "orgCode") String orgCode, @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of MeterInfos by ou");
         Page<MeterInfo> page = meterInfoService.findAllByCompanyCodeAndOrganizationCode(companyCode, orgCode, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meter-infos/byou/" + companyCode + "/" + orgCode );
@@ -123,7 +123,7 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/{comPointCode}")
     @Timed
     public List<MeterInfo> getAllMeterInfosByComPointCode
-    (@RequestParam(value = "comPointCode", required = false) String comPointCode) {
+    (@PathVariable(value = "comPointCode", required = false) String comPointCode) {
         log.debug("REST comPointCode to get a page of MeterInfo");
         List<MeterInfo> list = meterInfoService.findAllByComPointCode(comPointCode);
         return list;
@@ -138,7 +138,7 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/{meterCode}")
     @Timed
     public ResponseEntity<MeterInfo> getMeterInfoByMeterCode
-        (@RequestParam(value = "meterCode") String meterCode){
+        (@PathVariable(value = "meterCode") String meterCode){
         log.debug("Request to get MeterInfo : {}", meterCode);
         MeterInfo meterInfo = meterInfoService.findByMeterCode(meterCode);
         return  ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
@@ -153,7 +153,7 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/{meterCode}/{comPointCode}/{registerCode}")
     @Timed
     public ResponseEntity<MeterInfo> getOneMeterInfo
-    (@RequestParam(value = "meterInfo") @PathVariable String meterCode,@PathVariable String comPointCode,@PathVariable Integer registerCode){
+    (@PathVariable(value = "meterInfo") String meterCode,@PathVariable String comPointCode,@PathVariable Integer registerCode){
         log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
         MeterInfo meterInfo =meterInfoService.findByMeterCodeAndComPointCodeAndRegisterCode(meterCode,comPointCode,registerCode);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
