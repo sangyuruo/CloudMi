@@ -120,7 +120,7 @@ public class MeterInfoResource {
      * @param comPointCode the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
      */
-    @GetMapping("/meter-infos/{comPointCode}")
+    @GetMapping("/meter-infos/by-cpc/{comPointCode}")
     @Timed
     public List<MeterInfo> getAllMeterInfosByComPointCode
     (@PathVariable(value = "comPointCode", required = false) String comPointCode) {
@@ -135,7 +135,7 @@ public class MeterInfoResource {
      * @param meterCode the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of meterInfos in body
      */
-    @GetMapping("/meter-infos/{meterCode}")
+    @GetMapping("/meter-infos/by-mc/{meterCode}")
     @Timed
     public ResponseEntity<MeterInfo> getMeterInfoByMeterCode
         (@PathVariable(value = "meterCode") String meterCode){

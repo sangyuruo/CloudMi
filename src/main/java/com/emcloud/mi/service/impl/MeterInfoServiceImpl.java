@@ -10,9 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -43,6 +43,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         meterInfo.setCreateTime(Instant.now());
         meterInfo.setUpdatedBy(SecurityUtils.getCurrentUserLogin());
         meterInfo.setUpdateTime(Instant.now());
+        meterInfo.setMeterCode( UUID.randomUUID().toString() );
         return meterInfoRepository.save(meterInfo);
     }
 
@@ -59,7 +60,6 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         meterInfo.setUpdateTime(Instant.now());
         return meterInfoRepository.save(meterInfo);
     }
-
 
     /**
      *  Get all the meterInfos.
