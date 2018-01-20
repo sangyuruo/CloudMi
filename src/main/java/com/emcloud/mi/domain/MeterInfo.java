@@ -194,7 +194,7 @@ public class MeterInfo implements Serializable {
     @Size(max = 100)
     @ApiModelProperty(value = "大Endian")
     @Column(name = "big_endian", length = 100)
-    private String bigEndian;
+    private Boolean bigEndian;
 
     /**
      * 允许重复
@@ -503,18 +503,6 @@ public class MeterInfo implements Serializable {
         this.controlCommands = controlCommands;
     }
 
-    public String getBigEndian() {
-        return bigEndian;
-    }
-
-    public MeterInfo bigEndian(String bigEndian) {
-        this.bigEndian = bigEndian;
-        return this;
-    }
-
-    public void setBigEndian(String bigEndian) {
-        this.bigEndian = bigEndian;
-    }
 
     public Boolean isAllowDuplicate() {
         return allowDuplicate;
@@ -631,4 +619,18 @@ public class MeterInfo implements Serializable {
             ", enable='" + getEnable() + "'" +
             "}";
     }
+
+    public Boolean getBigEndian() {
+        return bigEndian;
+    }
+
+    public void setBigEndian(Boolean bigEndian) {
+        this.bigEndian = bigEndian;
+    }
+
+    public MeterInfo bigEndian(Boolean bigEndian) {
+        this.bigEndian = bigEndian;
+        return this;
+    }
+
 }
