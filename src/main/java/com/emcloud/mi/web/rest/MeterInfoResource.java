@@ -153,7 +153,8 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/{meterCode}/{comPointCode}/{registerCode}")
     @Timed
     public ResponseEntity<MeterInfo> getOneMeterInfo
-    (@PathVariable(value = "meterInfo") String meterCode,@PathVariable String comPointCode,@PathVariable Integer registerCode){
+    (@PathVariable(value = "meterCode") String meterCode,@PathVariable(value = "comPointCode") String comPointCode,
+     @PathVariable(value = "registerCode") Integer registerCode){
         log.debug("Request to get MeterInfo : {}", meterCode,comPointCode,registerCode);
         MeterInfo meterInfo =meterInfoService.findByMeterCodeAndComPointCodeAndRegisterCode(meterCode,comPointCode,registerCode);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
@@ -167,7 +168,7 @@ public class MeterInfoResource {
      */
     @GetMapping("/meter-infos/{id}")
     @Timed
-    public ResponseEntity<MeterInfo> getMeterInfo(@PathVariable Long id) {
+    public ResponseEntity<MeterInfo> getMeterInfo(@PathVariable(value="id") Long id) {
         log.debug("REST request to get MeterInfo : {}", id);
         MeterInfo meterInfo = meterInfoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));
@@ -181,7 +182,7 @@ public class MeterInfoResource {
      */
     @DeleteMapping("/meter-infos/{id}")
     @Timed
-    public ResponseEntity<Void> deleteMeterInfo(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMeterInfo(@PathVariable(value="id") Long id) {
         log.debug("REST request to delete MeterInfo : {}", id);
         meterInfoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
