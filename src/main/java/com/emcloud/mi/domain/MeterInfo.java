@@ -65,12 +65,28 @@ public class MeterInfo implements Serializable {
     private String addressCode;
 
     /**
+     * 地址名称
+     */
+    @Size(max = 64)
+    @ApiModelProperty(value = "地址名称")
+    @Column(name = "address_name", length = 64)
+    private String addressName;
+
+    /**
      * 组织编码
      */
     @Size(max = 64)
     @ApiModelProperty(value = "组织编码")
     @Column(name = "organization_code", length = 64)
     private String organizationCode;
+
+    /**
+     * 组织名称
+     */
+    @Size(max = 64)
+    @ApiModelProperty(value = "组织名称")
+    @Column(name = "organization_name", length = 64)
+    private String organizationName;
 
     /**
      * 公司编码
@@ -81,12 +97,31 @@ public class MeterInfo implements Serializable {
     private String companyCode;
 
     /**
+     * 公司名称
+     */
+    @Size(max = 64)
+    @ApiModelProperty(value = "公司名称")
+    @Column(name = "company_name", length = 64)
+    private String companyName;
+
+    /**
      * 串口编码
      */
     @Size(max = 64)
     @ApiModelProperty(value = "串口编码")
     @Column(name = "com_point_code", length = 64)
     private String comPointCode;
+
+    /**
+     * 串口登记名称
+     */
+    @Size(max = 64)
+    @ApiModelProperty(value = "串口登记名称")
+    @Column(name = "cpi_register_name", length = 64)
+    private String cpiRegisterName;
+
+
+
 
     /**
      * 设备类型代码
@@ -287,6 +322,19 @@ public class MeterInfo implements Serializable {
         this.addressCode = addressCode;
     }
 
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public MeterInfo addressName(String addressName) {
+        this.addressName = addressName;
+        return this;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
+    }
+
     public String getOrganizationCode() {
         return organizationCode;
     }
@@ -298,6 +346,45 @@ public class MeterInfo implements Serializable {
 
     public void setOrganizationCode(String organizationCode) {
         this.organizationCode = organizationCode;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public MeterInfo organizationName(String organizationName) {
+        this.organizationName = organizationName;
+        return this;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public MeterInfo companyName(String companyName) {
+        this.companyName = companyName;
+        return this;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCpiRegisterName() {
+        return cpiRegisterName;
+    }
+
+    public MeterInfo cpiRegisterName(String cpiRegisterName) {
+        this.cpiRegisterName = cpiRegisterName;
+        return this;
+    }
+
+    public void setCpiRegisterName(String cpiRegisterName) {
+        this.cpiRegisterName = cpiRegisterName;
     }
 
     public String getCompanyCode() {

@@ -38,7 +38,15 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="address_name" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="organization_code" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="organization_name" type="varchar(64)">
                 <constraints nullable="true" />
             </column>
 
@@ -46,7 +54,15 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="company_name" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="com_point_code" type="varchar(64)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cpi_register_name" type="varchar(64)">
                 <constraints nullable="true" />
             </column>
 

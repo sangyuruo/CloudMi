@@ -100,8 +100,8 @@ public class MeterInfoResourceIntTest {
     private static final String DEFAULT_CONTROL_COMMANDS = "AAAAAAAAAA";
     private static final String UPDATED_CONTROL_COMMANDS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_BIG_ENDIAN = "AAAAAAAAAA";
-    private static final String UPDATED_BIG_ENDIAN = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_BIG_ENDIAN = false;
+    private static final Boolean UPDATED_BIG_ENDIAN = true;
 
     private static final Boolean DEFAULT_ALLOW_DUPLICATE = false;
     private static final Boolean UPDATED_ALLOW_DUPLICATE = true;

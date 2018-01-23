@@ -52,12 +52,20 @@ entity MeterInfo {
   registerCode  Integer required,
   /** 地址编码*/
   addressCode String maxlength(64),
+  /** 地址名称 */
+  addressName String maxlength(64),
   /** 组织编码*/
   organizationCode String maxlength(64),
+  /** 组织名称 */
+  organizationName String maxlength(64) required,
   /** 公司编码*/
   companyCode String maxlength(64),
+  /** 公司名 */
+  companyName String maxlength(64)  required,
   /** 串口编码*/
   comPointCode String maxlength(64),
+  /** 串口登记名称 */
+  cpiRegisterName String maxlength(64) required,
   /** 设备分类代码*/
   meterTypeCode Integer required,
   /** 设备类型*/
@@ -85,7 +93,7 @@ entity MeterInfo {
   /** 下发命令*/
   controlCommands String maxlength(100),
   /** 大Endian*/
-  bigEndian String maxlength(100),
+  bigEndian String Boolean,
   /** 允许重复*/
   allowDuplicate Boolean ,
   /** 计算*/

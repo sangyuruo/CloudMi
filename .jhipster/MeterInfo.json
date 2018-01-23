@@ -53,8 +53,26 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "addressName",
+            "javadoc": "地址名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
             "fieldName": "organizationCode",
             "javadoc": "组织编码",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "organizationName",
+            "javadoc": "组织名称",
             "fieldType": "String",
             "fieldValidateRules": [
                 "maxlength"
@@ -71,8 +89,26 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
+            "fieldName": "companyName",
+            "javadoc": "公司名称",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
             "fieldName": "comPointCode",
             "javadoc": "串口编码",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 64
+        },
+        {
+            "fieldName": "cpiRegisterName",
+            "javadoc": "串口登记名称",
             "fieldType": "String",
             "fieldValidateRules": [
                 "maxlength"
@@ -184,11 +220,7 @@
         {
             "fieldName": "bigEndian",
             "javadoc": "大Endian",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 100
+            "fieldType": "Boolean"
         },
         {
             "fieldName": "allowDuplicate",
