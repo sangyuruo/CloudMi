@@ -114,7 +114,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="big_endian" type="varchar(100)">
+            <column name="big_endian" type="bit">
                 <constraints nullable="true" />
             </column>
 

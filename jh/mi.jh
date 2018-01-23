@@ -75,7 +75,7 @@ entity MeterInfo {
   /** 纬度*/
   latitude Double,
   /** 长码*/
-  longCode Long，
+  longCode Long,
   /** 起始偏移*/
   startOffset Integer required,
   /** 寄存器数量*/
@@ -93,7 +93,7 @@ entity MeterInfo {
   /** 下发命令*/
   controlCommands String maxlength(100),
   /** 大Endian*/
-  bigEndian String Boolean,
+  bigEndian Boolean,
   /** 允许重复*/
   allowDuplicate Boolean ,
   /** 计算*/
