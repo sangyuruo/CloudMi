@@ -103,7 +103,7 @@ public class MeterInfoServiceImpl implements MeterInfoService{
         return meterInfoRepository.findByMeterCode(meterCode);
     }
 
-  /**
+    /**
      *  Get one meterInfo by id.
      *
      *  @param meterCode,comPointCode,registerCode the id of the entity

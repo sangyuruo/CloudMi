@@ -138,7 +138,7 @@ public class MeterInfoResource {
     @GetMapping("/meter-infos/by-mc/{meterCode}")
     @Timed
     public ResponseEntity<MeterInfo> getMeterInfoByMeterCode
-        (@PathVariable(value = "meterCode") String meterCode){
+    (@PathVariable(value = "meterCode") String meterCode){
         log.debug("Request to get MeterInfo : {}", meterCode);
         MeterInfo meterInfo = meterInfoService.findByMeterCode(meterCode);
         return  ResponseUtil.wrapOrNotFound(Optional.ofNullable(meterInfo));

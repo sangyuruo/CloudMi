@@ -83,9 +83,10 @@ public class MeterInfo implements Serializable {
     /**
      * 组织名称
      */
+    @NotNull
     @Size(max = 64)
-    @ApiModelProperty(value = "组织名称")
-    @Column(name = "organization_name", length = 64)
+    @ApiModelProperty(value = "组织名称", required = true)
+    @Column(name = "organization_name", length = 64, nullable = false)
     private String organizationName;
 
     /**
@@ -97,11 +98,12 @@ public class MeterInfo implements Serializable {
     private String companyCode;
 
     /**
-     * 公司名称
+     * 公司名
      */
+    @NotNull
     @Size(max = 64)
-    @ApiModelProperty(value = "公司名称")
-    @Column(name = "company_name", length = 64)
+    @ApiModelProperty(value = "公司名", required = true)
+    @Column(name = "company_name", length = 64, nullable = false)
     private String companyName;
 
     /**
@@ -115,19 +117,17 @@ public class MeterInfo implements Serializable {
     /**
      * 串口登记名称
      */
+    @NotNull
     @Size(max = 64)
-    @ApiModelProperty(value = "串口登记名称")
-    @Column(name = "cpi_register_name", length = 64)
+    @ApiModelProperty(value = "串口登记名称", required = true)
+    @Column(name = "cpi_register_name", length = 64, nullable = false)
     private String cpiRegisterName;
 
-
-
-
     /**
-     * 设备类型代码
+     * 设备分类代码
      */
     @NotNull
-    @ApiModelProperty(value = "设备类型代码", required = true)
+    @ApiModelProperty(value = "设备分类代码", required = true)
     @Column(name = "meter_type_code", nullable = false)
     private Integer meterTypeCode;
 
@@ -157,7 +157,7 @@ public class MeterInfo implements Serializable {
     /**
      * 长码
      */
-    @ApiModelProperty(value = "纬度")
+    @ApiModelProperty(value = "长码")
     @Column(name = "long_code")
     private Long longCode;
 
@@ -165,24 +165,24 @@ public class MeterInfo implements Serializable {
      * 起始偏移
      */
     @NotNull
-    @ApiModelProperty(value = "起始偏移")
-    @Column(name = "start_offset")
+    @ApiModelProperty(value = "起始偏移", required = true)
+    @Column(name = "start_offset", nullable = false)
     private Integer startOffset;
 
     /**
      * 寄存器数量
      */
     @NotNull
-    @ApiModelProperty(value = "寄存器数量")
-    @Column(name = "number_of_registers")
+    @ApiModelProperty(value = "寄存器数量", required = true)
+    @Column(name = "number_of_registers", nullable = false)
     private Integer numberOfRegisters;
 
     /**
      * 控制地址
      */
     @NotNull
-    @ApiModelProperty(value = "控制地址")
-    @Column(name = "control_address")
+    @ApiModelProperty(value = "控制地址", required = true)
+    @Column(name = "control_address", nullable = false)
     private Integer controlAddress;
 
     /**
@@ -226,9 +226,8 @@ public class MeterInfo implements Serializable {
     /**
      * 大Endian
      */
-    @Size(max = 100)
     @ApiModelProperty(value = "大Endian")
-    @Column(name = "big_endian", length = 100)
+    @Column(name = "big_endian")
     private Boolean bigEndian;
 
     /**
@@ -250,7 +249,7 @@ public class MeterInfo implements Serializable {
      */
     @NotNull
     @ApiModelProperty(value = "是否有效", required = true)
-    @Column(name = "enable", nullable = false)
+    @Column(name = "jhi_enable", nullable = false)
     private Boolean enable;
 
     @OneToMany(mappedBy = "meterInfo")
@@ -361,32 +360,6 @@ public class MeterInfo implements Serializable {
         this.organizationName = organizationName;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public MeterInfo companyName(String companyName) {
-        this.companyName = companyName;
-        return this;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getCpiRegisterName() {
-        return cpiRegisterName;
-    }
-
-    public MeterInfo cpiRegisterName(String cpiRegisterName) {
-        this.cpiRegisterName = cpiRegisterName;
-        return this;
-    }
-
-    public void setCpiRegisterName(String cpiRegisterName) {
-        this.cpiRegisterName = cpiRegisterName;
-    }
-
     public String getCompanyCode() {
         return companyCode;
     }
@@ -400,6 +373,19 @@ public class MeterInfo implements Serializable {
         this.companyCode = companyCode;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public MeterInfo companyName(String companyName) {
+        this.companyName = companyName;
+        return this;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public String getComPointCode() {
         return comPointCode;
     }
@@ -411,6 +397,19 @@ public class MeterInfo implements Serializable {
 
     public void setComPointCode(String comPointCode) {
         this.comPointCode = comPointCode;
+    }
+
+    public String getCpiRegisterName() {
+        return cpiRegisterName;
+    }
+
+    public MeterInfo cpiRegisterName(String cpiRegisterName) {
+        this.cpiRegisterName = cpiRegisterName;
+        return this;
+    }
+
+    public void setCpiRegisterName(String cpiRegisterName) {
+        this.cpiRegisterName = cpiRegisterName;
     }
 
     public Integer getMeterTypeCode() {
@@ -455,35 +454,27 @@ public class MeterInfo implements Serializable {
     public Double getLatitude() {
         return latitude;
     }
+
     public MeterInfo latitude(Double latitude) {
         this.latitude = latitude;
         return this;
     }
+
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-
     public Long getLongCode() {
         return longCode;
     }
+
     public MeterInfo longCode(Long longCode) {
         this.longCode = longCode;
         return this;
     }
+
     public void setLongCode(Long longCode) {
         this.longCode = longCode;
-    }
-
-    public Boolean getEnable() {
-        return enable;
-    }
-    public MeterInfo enable(Boolean enable) {
-        this.enable = enable;
-        return this;
-    }
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
     }
 
     public Integer getStartOffset() {
@@ -590,6 +581,18 @@ public class MeterInfo implements Serializable {
         this.controlCommands = controlCommands;
     }
 
+    public Boolean isBigEndian() {
+        return bigEndian;
+    }
+
+    public MeterInfo bigEndian(Boolean bigEndian) {
+        this.bigEndian = bigEndian;
+        return this;
+    }
+
+    public void setBigEndian(Boolean bigEndian) {
+        this.bigEndian = bigEndian;
+    }
 
     public Boolean isAllowDuplicate() {
         return allowDuplicate;
@@ -615,6 +618,19 @@ public class MeterInfo implements Serializable {
 
     public void setCalculates(Integer calculates) {
         this.calculates = calculates;
+    }
+
+    public Boolean isEnable() {
+        return enable;
+    }
+
+    public MeterInfo enable(Boolean enable) {
+        this.enable = enable;
+        return this;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 
     public Set<MultiwaySwitchInfo> getMultiwaySwitchInfos() {
@@ -684,9 +700,13 @@ public class MeterInfo implements Serializable {
             ", meterName='" + getMeterName() + "'" +
             ", registerCode='" + getRegisterCode() + "'" +
             ", addressCode='" + getAddressCode() + "'" +
+            ", addressName='" + getAddressName() + "'" +
             ", organizationCode='" + getOrganizationCode() + "'" +
+            ", organizationName='" + getOrganizationName() + "'" +
             ", companyCode='" + getCompanyCode() + "'" +
+            ", companyName='" + getCompanyName() + "'" +
             ", comPointCode='" + getComPointCode() + "'" +
+            ", cpiRegisterName='" + getCpiRegisterName() + "'" +
             ", meterTypeCode='" + getMeterTypeCode() + "'" +
             ", meterType='" + getMeterType() + "'" +
             ", longitude='" + getLongitude() + "'" +
@@ -700,24 +720,10 @@ public class MeterInfo implements Serializable {
             ", updatedBy='" + getUpdatedBy() + "'" +
             ", updateTime='" + getUpdateTime() + "'" +
             ", controlCommands='" + getControlCommands() + "'" +
-            ", bigEndian='" + getBigEndian() + "'" +
+            ", bigEndian='" + isBigEndian() + "'" +
             ", allowDuplicate='" + isAllowDuplicate() + "'" +
             ", calculates='" + getCalculates() + "'" +
-            ", enable='" + getEnable() + "'" +
+            ", enable='" + isEnable() + "'" +
             "}";
     }
-
-    public Boolean getBigEndian() {
-        return bigEndian;
-    }
-
-    public void setBigEndian(Boolean bigEndian) {
-        this.bigEndian = bigEndian;
-    }
-
-    public MeterInfo bigEndian(Boolean bigEndian) {
-        this.bigEndian = bigEndian;
-        return this;
-    }
-
 }

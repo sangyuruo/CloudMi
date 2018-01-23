@@ -323,6 +323,60 @@ public class MeterCategoryInfoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkStartOffsetIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setStartOffset(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumberOfRegistersIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setNumberOfRegisters(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkControlAddressIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
+        // set the field null
+        meterCategoryInfo.setControlAddress(null);
+
+        // Create the MeterCategoryInfo, which fails.
+
+        restMeterCategoryInfoMockMvc.perform(post("/api/meter-category-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(meterCategoryInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<MeterCategoryInfo> meterCategoryInfoList = meterCategoryInfoRepository.findAll();
+        assertThat(meterCategoryInfoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkCreatedByIsRequired() throws Exception {
         int databaseSizeBeforeTest = meterCategoryInfoRepository.findAll().size();
         // set the field null

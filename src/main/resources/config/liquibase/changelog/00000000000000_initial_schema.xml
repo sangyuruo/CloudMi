@@ -55,11 +55,5 @@
                                  constraintName="fk_evt_pers_audit_evt_data"
                                  referencedColumnNames="event_id"
                                  referencedTableName="jhi_persistent_audit_event"/>
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/meter_category_info.csv"
-                  separator=","
-                  tableName="meter_category_info"/>
-
     </changeSet>
 </databaseChangeLog>
-

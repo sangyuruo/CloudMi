@@ -1,7 +1,6 @@
 package com.emcloud.mi.repository;
 
 import com.emcloud.mi.domain.MeterCategoryInfo;
-import com.emcloud.mi.domain.MeterInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;

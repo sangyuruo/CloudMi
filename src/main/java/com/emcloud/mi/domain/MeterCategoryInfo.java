@@ -90,24 +90,24 @@ public class MeterCategoryInfo implements Serializable {
      * 起始偏移
      */
     @NotNull
-    @ApiModelProperty(value = "起始偏移")
-    @Column(name = "start_offset")
+    @ApiModelProperty(value = "起始偏移", required = true)
+    @Column(name = "start_offset", nullable = false)
     private Integer startOffset;
 
     /**
      * 寄存器数量
      */
     @NotNull
-    @ApiModelProperty(value = "寄存器数量")
-    @Column(name = "number_of_registers")
+    @ApiModelProperty(value = "寄存器数量", required = true)
+    @Column(name = "number_of_registers", nullable = false)
     private Integer numberOfRegisters;
 
     /**
      * 控制区
      */
     @NotNull
-    @ApiModelProperty(value = "控制区")
-    @Column(name = "control_address")
+    @ApiModelProperty(value = "控制区", required = true)
+    @Column(name = "control_address", nullable = false)
     private Integer controlAddress;
 
     /**

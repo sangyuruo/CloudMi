@@ -1,6 +1,5 @@
 package com.emcloud.mi.service;
 
-import com.emcloud.mi.domain.MeterStatus;
 import com.emcloud.mi.domain.MultiwaySwitch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,14 +16,6 @@ public interface MultiwaySwitchService {
      * @return the persisted entity
      */
     MultiwaySwitch save(MultiwaySwitch multiwaySwitch);
-
-    /**
-     * update a multiwaySwitch.
-     *
-     * @param multiwaySwitch the entity to update
-     * @return the persisted entity
-     */
-    MultiwaySwitch update(MultiwaySwitch multiwaySwitch);
 
     /**
      *  Get all the multiwaySwitches.
