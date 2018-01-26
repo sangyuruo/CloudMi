@@ -32,8 +32,7 @@ public class MeterInfo implements Serializable {
 
     /**
      * 设备编码
-     */
-    @NotNull
+     */ 
     @Size(max = 64)
     @ApiModelProperty(value = "设备编码", required = true)
     @Column(name = "meter_code", length = 64, nullable = false)
